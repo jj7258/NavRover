@@ -13,8 +13,8 @@ DWAPlannerROS:
   holonomic_robot: false
 
   # Goal Tolerance Parameters
-  yaw_goal_tolerance: 0.1
-  xy_goal_tolerance: 0.1
+  yaw_goal_tolerance: 0.25
+  xy_goal_tolerance: 0.25
   latch_xy_goal_tolerance: true
 
   # Forward Simulation Parameters
