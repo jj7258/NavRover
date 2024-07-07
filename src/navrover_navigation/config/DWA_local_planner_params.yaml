@@ -14,8 +14,8 @@ DWAPlannerROS:
   min_obstacle_dist: 0.4  # Increase this value based on your new footprint
 
   # Goal Tolerance Parameters
-  yaw_goal_tolerance: 0.1
-  xy_goal_tolerance: 0.1
+  yaw_goal_tolerance: 0.25
+  xy_goal_tolerance: 0.25
   latch_xy_goal_tolerance: false
 
   # Forward Simulation Parameters
