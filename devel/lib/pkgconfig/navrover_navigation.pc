@@ -1,0 +1,8 @@
+prefix=/root/NavRover/devel
+
+Name: navrover_navigation
+Description: Description of navrover_navigation
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

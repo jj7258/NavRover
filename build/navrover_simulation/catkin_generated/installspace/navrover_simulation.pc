@@ -1,0 +1,8 @@
+prefix=/root/NavRover/install
+
+Name: navrover_simulation
+Description: Description of navrover_simulation
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
