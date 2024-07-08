@@ -1,14 +1,12 @@
-obstacle_range: 7.0
-raytrace_range: 7.5
+footprint: [[-0.25, -0.20], [-0.25, 0.20], [0.25, 0.20], [0.25, -0.20]]
+footprint_padding: 0.04  # Reduced
 
-footprint: [[-0.25, -0.30], [-0.25, 0.30], [0.25, 0.30], [0.25, -0.30]]
-footprint_padding: 0.01
+obstacle_range: 6.0  # Increased
+raytrace_range: 6.5  # Increased
 
-inflation_radius: 0.8
-transform_tolerance: 0.5
-update_distance_threshold: 0.1
+inflation_radius: 0.45  # Reduced
+cost_scaling_factor: 2.9  # Reduced to make inflation less aggressive
 
-map_type: costmap
 observation_sources: laser_scan_sensor
 
 laser_scan_sensor: {
@@ -17,29 +15,8 @@ laser_scan_sensor: {
   topic: /scan, 
   marking: true, 
   clearing: true, 
-  min_obstacle_height: 0.05, 
-  max_obstacle_height: 1.0, 
-  obstacle_range: 7.0,
-  raytrace_range: 7.5,
-  inf_is_valid: false,
-  obstacle_detection_threshold: 0.7
+  min_obstacle_height: 0.03, 
+  max_obstacle_height: 0.6, 
+  obstacle_range: 5.5,
+  raytrace_range: 6.0
 }
-
-inflation_layer:
-  enabled: true
-  cost_scaling_factor: 8.0
-  inflation_radius: 0.9
-
-obstacle_layer:
-  enabled: true
-  combination_method: 1
-  track_unknown_space: true
-  obstacle_range: 7.0
-  raytrace_range: 7.5
-  observation_persistence: 0.0
-  min_obstacle_height: 0.05
-  max_obstacle_height: 1.0
-  obstacle_filters:
-    - name: inflation
-      type: "costmap_2d::InflationLayer"
-  filter_obstacles: true

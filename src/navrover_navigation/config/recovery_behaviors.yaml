@@ -7,21 +7,20 @@ recovery_behaviors:
     type: 'move_slow_and_clear/MoveSlowAndClear'
 
 aggressive_reset:
-  reset_distance: 3.0
+  reset_distance: 2.5  # Slightly reduced to be more conservative
 
 rotate_recovery:
   frequency: 20.0
-  sim_time: 2.0
-  angular_sim_granularity: 0.1
-  linear_sim_granularity: 0.025
-  angular_vel_max: 1.0
-  linear_vel_max: 0.5
-  obstacle_range: 7.0
-  costmap_clearing_threshold: 0.1
-  escape_vel: -0.1
+  sim_time: 1.7
+  angular_sim_granularity: 0.075
+  linear_sim_granularity: 0.019
+  angular_vel_max: 1.3  # Reduced
+  linear_vel_max: 0.6  # Reduced
+  obstacle_range: 5.7
+  costmap_clearing_threshold: 0.18
 
 move_slow_and_clear:
   clearing_distance: 0.5
-  limited_trans_speed: 0.1
-  limited_rot_speed: 0.4
-  limited_distance: 0.3
+  limited_trans_speed: 0.5  # Reduced
+  limited_rot_speed: 0.9  # Reduced
+  limited_distance: 0.9

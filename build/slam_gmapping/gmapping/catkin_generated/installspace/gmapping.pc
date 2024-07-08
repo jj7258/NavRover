@@ -1,8 +1,0 @@
-prefix=/root/NavRover/install
-
-Name: gmapping
-Description: Description of gmapping
-Version: 1.4.2
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
