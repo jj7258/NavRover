@@ -14,4 +14,4 @@ move_base:
 
   # Keep the clearing settings as they are general parameters
   clearing_rotation_allowed: true
-  clearing_distance: 0.9
+  clearing_distance: 0.5
