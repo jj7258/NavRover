@@ -1,3 +1,6 @@
-build
-devel
-.vscode
+NavRover/build
+NavRover/devel
+NavRover/.catkin_workspace
+NavRover/.vscode
+
+
