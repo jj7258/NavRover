@@ -1001,50 +1001,6 @@
       <static>1</static>
       <pose>-0.016998 -1.77345 0 0 -0 0</pose>
     </model>
-    <model name='Floor_room_0'>
-      <link name='main'>
-        <pose>0 0 0.01 0 -0 0</pose>
-        <collision name='main_Collision'>
-          <geometry>
-            <box>
-              <size>20 20 0.001</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='main_Visual'>
-          <geometry>
-            <box>
-              <size>20 20 0.001</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://Floor_room/materials/scripts</uri>
-              <uri>model://Floor_room/materials/textures</uri>
-              <name>floor_room</name>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <static>1</static>
-      <pose>0.013552 0.022255 0 0 -0 0</pose>
-    </model>
     <model name='nights_and_weekends_s5'>
       <static>1</static>
       <link name='link'>
