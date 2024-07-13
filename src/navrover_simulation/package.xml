@@ -53,6 +53,13 @@
   <build_export_depend>rospy</build_export_depend>
   <exec_depend>rospy</exec_depend>
 
+  <run_depend>gazebo_ros</run_depend>
+  <export> 
+    <gazebo_ros gazebo_model_path="${prefix}/models"/> 
+    <gazebo_ros gazebo_media_path="${prefix}/models"/> 
+  </export>
+
+
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
