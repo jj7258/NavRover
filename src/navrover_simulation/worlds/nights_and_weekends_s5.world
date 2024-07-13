@@ -959,7 +959,7 @@
     </model>
     <model name='Floor_room'>
       <link name='main'>
-        <pose>0 0 0.01 0 -0 0</pose>
+        <pose>0 0 0 0 0 0</pose>
         <collision name='main_Collision'>
           <geometry>
             <box>
