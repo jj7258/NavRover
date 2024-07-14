@@ -8,11 +8,10 @@ NavRover is a ROS-based autonomous rover project aimed at advanced navigation an
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
   - [Installing ROS Noetic & Necessary Packages](#installing-ros-noetic--necessary-packages)
+  - [Installation](#installation)
 - [Usage](#usage)
-  - [Simulation](#simulation)
-  - [Teleoperation](#teleoperation)
+  - [Simulation & Teleoperation](#simulation--teleoperation)
   - [Navigation](#navigation)
 - [Architecture](#architecture)
 - [Contributing](#contributing)
@@ -47,7 +46,10 @@ Ensure you have the following installed:
 
 ### Installing ROS Noetic & Necessary Packages
 
-For detailed instructions on how to install ROS Noetic and the necessary packages, please refer to this [YouTube video tutorial](LINK WILL BE ADDED HERE).
+Please refer to this [YouTube video](https://youtu.be/x5MhydijWmc?si=WYQ-wIAWBsNOwxfo) on installing Ubuntu 20.04 and Virtual Box.  
+Please refer to this [YouTube video](https://youtu.be/ZA7u2XPmnlo?si=0cQu7ZOh-GIMOnjV) on installing ROS Noetic.  
+Please refer to this [YouTube video](https://youtu.be/Jbyb0kQXhJU?si=8C96k2CQqmoKXb9S) on installing the necessary packages and setting up this project.  
+
 
 ### Installation
 
@@ -73,45 +75,51 @@ For detailed instructions on how to install ROS Noetic and the necessary package
 
 ## Usage
 
-### Simulation
+### Simulation & Teleoperation
 
 1. Launch the simulation environment:
 
     ```bash
-    roslaunch navrover_gazebo navrover_world.launch
+    roslaunch navrover_simulation gazebo.launch
     ```
 
-2. Visualize the simulation in RViz:
+2. Launch the teleoperation node:
 
     ```bash
-    roslaunch navrover_description display.launch
+    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
     ```
 
-### Teleoperation
-
-1. Launch the teleoperation node:
-
-    ```bash
-    roslaunch navrover_teleop teleop.launch
-    ```
-
-2. Use the keyboard or joystick to control the rover.
+3. Use the keyboard to control the rover.
 
 ### Navigation
 
-1. Launch the navigation stack:
+1. Launch the simulation environment:
 
     ```bash
-    roslaunch navrover_navigation navrover_navigation.launch
+    roslaunch navrover_simulation gazebo.launch
     ```
 
-2. Set goals in RViz to navigate the rover autonomously.
+2. Launch the navigation stack:
+
+    ```bash
+    roslaunch navrover_navigation navigation.launch
+    ```
+
+3. Launch the teleoperation node:
+
+    ```bash
+    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+    ```
+
+4. Set the initial pose using **2D Initial Pose** in Rviz.
+5. Drive the rover around until it gets localized ( the AMCL arrows become concentrated).
+6. Set the navigation goal using **2D Nav Goal** in Rviz.
 
 ## Architecture
 
 NavRover consists of several packages, each with a specific role:
 
-- **navrover_description**: URDF and Xacro files for the rover model and gazebo models.
+- **navrover_description**: URDF and Xacro files for the rover model and Gazebo models.
 - **navrover_navigation**: Navigation stack and configurations.
 
 ## Contributing
