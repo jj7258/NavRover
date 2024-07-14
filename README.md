@@ -28,7 +28,7 @@ NavRover is a versatile rover designed to perform autonomous navigation and mapp
 - **ROS Noetic Compatibility**: Utilizes the latest ROS features.
 - **Autonomous Navigation**: Implements the DWA planner/Trajectory planner for efficient path planning.
 - **2D Mapping and Navigation**: Generates and navigates detailed 2D maps using sensor data.
-- **Teleoperation**: Allows remote control via ROS nodes.
+- **Teleoperation**: Allows remote control via *teleop_twist_keyboard* node.
 - **Simulation**: Complete simulation capabilities using Gazebo.
 
 *Note: 3D mapping and navigation features are currently under development.*
