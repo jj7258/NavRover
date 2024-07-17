@@ -17,15 +17,12 @@
                                       right_rocker_position_controller"/>
 
   <!-- Add joint_state_publisher node -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <!-- <param name="use_gui" value="$(arg gui)"/>
-    <rosparam param="source_list">[/rover/joint_states]</rosparam> -->
-  </node>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
 
   <!-- Convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
         respawn="false" output="screen">
-    <!-- <remap from="/joint_states" to="/rover/joint_states" /> -->
+    <remap from="/joint_states" to="/rover/joint_states" />
   </node>
 
   <!-- Run Gazebo -->

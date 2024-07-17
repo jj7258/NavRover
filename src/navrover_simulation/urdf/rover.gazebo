@@ -30,32 +30,17 @@
   <gazebo>
     <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
       <updateRate>100.0</updateRate>
-      <!-- <robotNamespace>/rover</robotNamespace> -->
-      <leftFrontJoint>wheel_fr_joint</leftFrontJoint>
-      <rightFrontJoint>wheel_fl_joint</rightFrontJoint>
-      <leftRearJoint>wheel_rr_joint</leftRearJoint>
-      <rightRearJoint>wheel_rl_joint</rightRearJoint>
+      <leftFrontJoint>wheel_fl_joint</leftFrontJoint>
+      <rightFrontJoint>wheel_fr_joint</rightFrontJoint>
+      <leftRearJoint>wheel_rl_joint</leftRearJoint>
+      <rightRearJoint>wheel_rr_joint</rightRearJoint>
       <wheelSeparation>0.419308</wheelSeparation>
       <wheelDiameter>0.13</wheelDiameter>
       <robotBaseFrame>base_footprint</robotBaseFrame>
-      <torque>10</torque>
-      <topicName>cmd_vel</topicName>
-      <commandTopic>cmd_vel</commandTopic>
+      <torque>15</torque>
+      <topicName>/cmd_vel</topicName>
       <broadcastTF>true</broadcastTF>
-      <odometryTopic>odom</odometryTopic>
-      <odometryFrame>odom</odometryFrame>
-      <wheelAcceleration>1.0</wheelAcceleration>
-      <wheelTorque>20</wheelTorque>
-      <!-- <linearVelocityMultiplier>-1</linearVelocityMultiplier>
-      <angularVelocityMultiplier>-1</angularVelocityMultiplier> -->
-      <covariance_x>0.000100</covariance_x>
-      <covariance_y>0.000100</covariance_y>
-      <covariance_yaw>0.010000</covariance_yaw>
-      <!-- <publishWheelJointState>true</publishWheelJointState> -->
-      <publishTf>1</publishTf>
-      <publishOdomTF>false</publishOdomTF>
-      <!-- <publishWheelTF>true</publishWheelTF> -->
-      <publishOdomTopic>true</publishOdomTopic>
+      <publishWheelJointState>true</publishWheelJointState>
     </plugin>
   </gazebo>
 
@@ -69,8 +54,8 @@
           <horizontal>
             <samples>360</samples>
             <resolution>1</resolution>
-            <min_angle>3.14159</min_angle>
-            <max_angle>-3.14159</max_angle>
+            <min_angle>-5.60</min_angle>
+            <max_angle>-0.63</max_angle>
           </horizontal>
         </scan>
         <range>
@@ -124,6 +109,43 @@
       <distortionK3>0.0</distortionK3>
       <distortionT1>0.0</distortionT1>
       <distortionT2>0.0</distortionT2>
+    </plugin>
+  </sensor>
+</gazebo>
+
+<gazebo reference="camera_link">
+  <sensor type="depth" name="kinect_camera">
+    <update_rate>20</update_rate>
+    <camera>
+      <horizontal_fov>1.047198</horizontal_fov>
+      <image>
+        <width>640</width>
+        <height>480</height>
+        <format>R8G8B8</format>
+      </image>
+      <clip>
+        <near>0.05</near>
+        <far>3.0</far>
+      </clip>
+    </camera>
+    <plugin name="kinect_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+      <baseline>0.2</baseline>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>20.0</updateRate>
+      <cameraName>kinect</cameraName>
+      <imageTopicName>rgb/image_raw</imageTopicName>
+      <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+      <depthImageTopicName>depth/image_raw</depthImageTopicName>
+      <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+      <pointCloudTopicName>depth/points</pointCloudTopicName>
+      <frameName>camera_depth_optical_frame</frameName>
+      <pointCloudCutoff>0.5</pointCloudCutoff>
+      <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+      <distortionK1>0.00000001</distortionK1>
+      <distortionK2>0.00000001</distortionK2>
+      <distortionK3>0.00000001</distortionK3>
+      <distortionT1>0.00000001</distortionT1>
+      <distortionT2>0.00000001</distortionT2>
     </plugin>
   </sensor>
 </gazebo>
@@ -194,6 +216,14 @@
   </gazebo>
 
   <gazebo reference="camera_link">
+    <material>Gazebo/Gray</material>
+  </gazebo>
+
+  <gazebo reference="kinect_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="kinect_mount">
     <material>Gazebo/Gray</material>
   </gazebo>
 

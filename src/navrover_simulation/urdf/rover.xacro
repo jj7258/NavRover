@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rover">
 
   <xacro:include filename="$(find navrover_simulation)/urdf/rover.gazebo" />  
+  <xacro:include filename="$(find navrover_simulation)/urdf/kinect_sensor.xacro" />
   <xacro:property name="PI" value="3.1415926535897931"/>
   
   <xacro:macro name="default_inertial" params="mass">
@@ -33,8 +34,7 @@
     <origin xyz="0 0 0.22" rpy="0 0 0"/>
   </joint>
 
-  
-
+  <!-- Base Link -->
   <link name="base_link">
     <visual>
       <origin xyz="0 0 0.051" rpy="0 0 ${PI}"/>
@@ -112,7 +112,37 @@
     <origin xyz="0 0 0.02" rpy="0 0 0"/>
   </joint>
 
-  <!-- Camera Link -->
+    <!-- Depth Camera Mount Link -->
+  <link name="depth_camera_mount">
+    <visual>
+      <origin xyz="0 0 0.125" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.02" length="0.25"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.125" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.02" length="0.25"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.000208" ixy="0" ixz="0" iyy="0.000208" iyz="0" izz="0.00002"/>
+    </inertial>
+  </link>
+
+  <!-- Depth Camera Mount Joint -->
+  <joint name="depth_camera_mount_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="depth_camera_mount"/>
+    <origin xyz="0 0 0.102" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:sensor_kinect parent="depth_camera_mount" />
+
+    <!-- Camera Link -->
   <link name="camera_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
@@ -199,10 +229,11 @@
     </joint>
   </xacro:macro>
 
-  <xacro:motor prefix="fl" parent_link="left_rocker" x_pos="-0.230" y_pos="-0.15" z_pos="0"/>
-  <xacro:motor prefix="fr" parent_link="right_rocker" x_pos="-0.230" y_pos="-0.15" z_pos="0"/>
-  <xacro:motor prefix="rl" parent_link="left_rocker" x_pos="0.230" y_pos="-0.15" z_pos="0"/>
-  <xacro:motor prefix="rr" parent_link="right_rocker" x_pos="0.230" y_pos="-0.15" z_pos="0"/>
+  <xacro:motor prefix="rl" parent_link="left_rocker" x_pos="-0.230" y_pos="-0.15" z_pos="0"/>
+  <xacro:motor prefix="rr" parent_link="right_rocker" x_pos="-0.230" y_pos="-0.15" z_pos="0"/>
+  <xacro:motor prefix="fl" parent_link="left_rocker" x_pos="0.230" y_pos="-0.15" z_pos="0"/>
+  <xacro:motor prefix="fr" parent_link="right_rocker" x_pos="0.230" y_pos="-0.15" z_pos="0"/>
+
 
   <xacro:macro name="wheel" params="prefix parent_link z_offset">
     <link name="wheel_${prefix}">
@@ -233,10 +264,10 @@
     </joint>
   </xacro:macro>
 
-  <xacro:wheel prefix="rl" parent_link="motor_rl" z_offset="0.07"/>
-  <xacro:wheel prefix="rr" parent_link="motor_rr" z_offset="-0.07"/>
   <xacro:wheel prefix="fl" parent_link="motor_fl" z_offset="0.07"/>
   <xacro:wheel prefix="fr" parent_link="motor_fr" z_offset="-0.07"/>
+  <xacro:wheel prefix="rl" parent_link="motor_rl" z_offset="0.07"/>
+  <xacro:wheel prefix="rr" parent_link="motor_rr" z_offset="-0.07"/>
 
   <!-- Transmissions for ros_control -->
   <transmission name="left_rocker_trans">
