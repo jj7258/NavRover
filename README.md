@@ -155,6 +155,7 @@ This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) 
 
 - [Jerin Peter](https://github.com/jerinpeter)
 - [Leo Rover](https://www.leorover.tech/)
+- [Turtlebot](https://github.com/turtlebot/turtlebot)
 - Buildspace's Nights & Weekends program
 - ROS community
 - Open-source contributors
