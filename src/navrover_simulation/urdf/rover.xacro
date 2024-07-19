@@ -229,10 +229,10 @@
     </joint>
   </xacro:macro>
 
-  <xacro:motor prefix="rl" parent_link="left_rocker" x_pos="-0.230" y_pos="-0.15" z_pos="0"/>
-  <xacro:motor prefix="rr" parent_link="right_rocker" x_pos="-0.230" y_pos="-0.15" z_pos="0"/>
-  <xacro:motor prefix="fl" parent_link="left_rocker" x_pos="0.230" y_pos="-0.15" z_pos="0"/>
-  <xacro:motor prefix="fr" parent_link="right_rocker" x_pos="0.230" y_pos="-0.15" z_pos="0"/>
+  <xacro:motor prefix="rr" parent_link="left_rocker" x_pos="-0.230" y_pos="-0.15" z_pos="0"/>
+  <xacro:motor prefix="rl" parent_link="right_rocker" x_pos="-0.230" y_pos="-0.15" z_pos="0"/>
+  <xacro:motor prefix="fr" parent_link="left_rocker" x_pos="0.230" y_pos="-0.15" z_pos="0"/>
+  <xacro:motor prefix="fl" parent_link="right_rocker" x_pos="0.230" y_pos="-0.15" z_pos="0"/>
 
 
   <xacro:macro name="wheel" params="prefix parent_link z_offset">
@@ -244,7 +244,7 @@
         <material name="black"/>
       </visual>
       <collision>
-        <geometry>https://github.com/jj7258/NavRover.git
+        <geometry>
           <cylinder radius="0.065" length="0.058785"/>
         </geometry>
       </collision>
@@ -264,10 +264,10 @@
     </joint>
   </xacro:macro>
 
-  <xacro:wheel prefix="fl" parent_link="motor_fl" z_offset="0.07"/>
-  <xacro:wheel prefix="fr" parent_link="motor_fr" z_offset="-0.07"/>
-  <xacro:wheel prefix="rl" parent_link="motor_rl" z_offset="0.07"/>
-  <xacro:wheel prefix="rr" parent_link="motor_rr" z_offset="-0.07"/>
+  <xacro:wheel prefix="fr" parent_link="motor_fr" z_offset="0.07"/>
+  <xacro:wheel prefix="fl" parent_link="motor_fl" z_offset="-0.07"/>
+  <xacro:wheel prefix="rr" parent_link="motor_rr" z_offset="0.07"/>
+  <xacro:wheel prefix="rl" parent_link="motor_rl" z_offset="-0.07"/>
 
   <!-- Transmissions for ros_control -->
   <transmission name="left_rocker_trans">

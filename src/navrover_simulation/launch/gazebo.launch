@@ -34,7 +34,7 @@
 
   <env name="GAZEBO_MODEL_PATH" value="$(find navrover_simulation)/models:$(optenv GAZEBO_MODEL_PATH)"/>
   <env name="GAZEBO_RESOURCE_PATH" value="$(find navrover_simulation)/worlds:$(optenv GAZEBO_RESOURCE_PATH)"/>
-  
+
   <!-- Spawn the robot model -->
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
         args="-param robot_description -urdf -model rover -z 0.22"
