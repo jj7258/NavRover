@@ -31,7 +31,7 @@ NavRover is a versatile rover designed to perform autonomous navigation and mapp
 ![2D Mapping](assets/navrover_2d_mapping.gif)
 
 ### Autonomous Navigation
-![Autonomous Navigation](assets/navrover_navigation.gif)
+![Autonomous Navigation](assets/navrover_navigation.mp4)
 
 ## Features
 
