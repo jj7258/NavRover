@@ -22,6 +22,17 @@ NavRover is a ROS-based autonomous rover project aimed at advanced navigation an
 
 NavRover is a versatile rover designed to perform autonomous navigation and mapping. It leverages ROS Noetic to provide robust simulation and teleoperation capabilities, making it an ideal platform for robotics students and enthusiasts. This project is an extension of my final year engineering project, further developed through Buildspace's Nights & Weekends program S5.
 
+## Project Showcase
+
+### CAD Model
+![Rover CAD Model](assets/navrover_cad_model.gif)
+
+### 2D Mapping Process
+![2D Mapping](assets/navrover_2d_mapping.gif)
+
+### Autonomous Navigation
+![Autonomous Navigation](assets/navrover_navigation.gif)
+
 ## Features
 
 - **4-Wheeled Rocker Mechanism**: Ensures stability on uneven terrains.
