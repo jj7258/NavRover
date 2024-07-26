@@ -1,0 +1,21 @@
+shutdown_costmaps: false
+controller_frequency: 5.0
+planner_patience: 5.0
+controller_patience: 15.0
+conservative_reset_dist: 3.0
+planner_frequency: 1.0
+oscillation_timeout: 10.0
+oscillation_distance: 0.2
+
+global_costmap:
+  static_map: true
+  
+local_costmap:
+  static_map: false
+  rolling_window: true
+  width: 4.0
+  height: 4.0
+  resolution: 0.05
+
+base_global_planner: "navfn/NavfnROS"
+base_local_planner: "base_local_planner/TrajectoryPlannerROS"
