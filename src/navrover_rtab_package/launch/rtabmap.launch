@@ -1,0 +1,43 @@
+<launch>
+  <!-- RTAB-Map -->
+  <group ns="rtabmap">
+    <node name="rtabmap" pkg="rtabmap_slam" type="rtabmap" output="screen" args="--delete_db_on_start"> <!-- Delete database on start -->
+      
+      <!--ROS Parameters-->
+      <param name="frame_id" type="string" value="base_link"/> <!-- Frame id of the robot -->
+      <param name="subscribe_depth" type="bool" value="true"/> <!-- Subscribe to depth image -->
+      <param name="subscribe_scan" type="bool" value="true"/> <!-- Subscribe to laser scan -->
+      
+      <!--Topics-->
+      <remap from="odom" to="/odom"/> <!-- Use /odom topic from odometry node -->
+      <remap from="scan" to="/scan"/> <!-- Use /scan topic from laser node -->
+      <remap from="rgb/image" to="/kinect/rgb/image_raw"/> <!-- Use /kinect/rgb/image_raw topic from kinect node -->
+      <remap from="depth/image" to="/kinect/depth/image_raw"/> <!-- Use /kinect/depth/image_raw topic from kinect node --> 
+      <remap from="rgb/camera_info" to="/kinect/rgb/camera_info"/> <!-- Use /kinect/rgb/camera_info topic from kinect node -->
+
+
+      <!--Parameters-->  
+      <param name="queue_size" type="int" value="10"/> <!-- Queue size for topics -->
+      <param name="approx_sync" type="bool" value="true"/> <!-- Synchronize topics -->
+
+      <!--RTAB-Map Parameters-->
+      <param name="RGBD/NeighborLinkRefining" type="string" value="true"/> <!-- Refine neighbor links -->
+      <param name="RGBD/ProximityBySpace" type="string" value="true"/> <!-- Proximity by space -->
+      <param name="RGBD/AngularUpdate" type="string" value="0.01"/> <!-- Angular update -->
+      <param name="RGBD/LinearUpdate" type="string" value="0.01"/> <!-- Linear update -->
+      <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/> <!-- Optimize from graph end -->
+      <param name="Optimizer/Slam2D" type="string" value="true"/> <!-- 2D SLAM -->
+      <param name="Grid/FromDepth" type="string" value="false"/> <!-- From depth -->
+      <param name="Reg/Force3DoF" type="string" value="true"/> <!-- Force 3 degrees of freedom -->
+      <param name="Reg/Strategy" type="string" value="1"/> <!-- Strategy -->
+      <param name="Vis/MinInliers" type="string" value="5"/> <!-- Minimum inliers -->
+      <param name="Vis/InlierDistance" type="string" value="0.1"/> <!-- Inlier distance -->
+      <param name="Rtabmap/TimeThr" type="string" value="700"/> <!-- Time threshold -->
+      <param name="Mem/RehearsalSimilarity" type="string" value="0.45"/> <!-- Rehearsal similarity -->
+
+    </node>
+  </group>
+
+  <!-- Visualization -->
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find your_package)/rviz/rtabmap_mapping.rviz"/> -->
+</launch>

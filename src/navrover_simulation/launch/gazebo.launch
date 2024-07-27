@@ -23,7 +23,8 @@
 
   <!-- Run Gazebo -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find navrover_simulation)/worlds/teleop.world"/>
+    <arg name="world_name" value="$(find navrover_simulation)/worlds/rtabmap.world"/>
+    <!-- <arg name="world_name" value="$(find navrover_simulation)/worlds/teleop.world"/> -->
     <!-- <arg name="world_name" value="$(find navrover_simulation)/worlds/nights_and_weekends_s5.world"/> -->
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
