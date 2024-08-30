@@ -40,13 +40,27 @@
         <param name="Optimizer/Slam2D" type="string" value="true"/>
         <param name="Reg/Force3DoF" type="string" value="true"/>
         <param name="Reg/Strategy" type="string" value="1"/>
+        <param name="Vis/MinInliers" type="string" value="5"/>           
+        <param name="Vis/InlierDistance" type="string" value="0.1"/>
+        <param name="Rtabmap/TimeThr" type="string" value="700"/>        
+        <param name="Mem/RehearsalSimilarity" type="string" value="0.45"/>
+        <param name="Kp/MaxDepth" type="string" value="4.0"/>
+        <param name="Icp/CorrespondenceRatio" type="string" value="0.6"/> 
+        <!-- <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>
+        <param name="RGBD/ProximityBySpace" type="string" value="true"/>
+        <param name="RGBD/AngularUpdate" type="string" value="0.01"/>
+        <param name="RGBD/LinearUpdate" type="string" value="0.01"/>
+        <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
+        <param name="Optimizer/Slam2D" type="string" value="true"/>
+        <param name="Reg/Force3DoF" type="string" value="true"/>
+        <param name="Reg/Strategy" type="string" value="1"/>
         <param name="Vis/MinInliers" type="string" value="5"/>
         <param name="Vis/InlierDistance" type="string" value="0.1"/>
         <param name="Rtabmap/TimeThr" type="string" value="700"/>
         <param name="Mem/RehearsalSimilarity" type="string" value="0.45"/>
         <param name="Kp/MaxDepth" type="string" value="4.0"/>
         <param name="Icp/CorrespondenceRatio" type="string" value="0.5"/>
-        <param name="Rtabmap/TimeThr" type="string" value="700"/>
+        <param name="Rtabmap/TimeThr" type="string" value="700"/> -->
 
         </node>    
     </group>
