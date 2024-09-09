@@ -1,0 +1,42 @@
+<launch>
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro --inorder '$(find navrover_description)/urdf/rover.xacro'" />
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find navrover_control)/config/rover_control.yaml" command="load"/>
+
+  <!-- Load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/rover" args="joint_state_controller
+                                      left_rocker_position_controller
+                                      right_rocker_position_controller"/>
+
+  <!-- Add joint_state_publisher node -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+  <!-- Convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+    <remap from="/joint_states" to="/rover/joint_states" />
+  </node>
+
+  <!-- Run Gazebo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find navrover_gazebo)/worlds/rtabmap.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find navrover_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="$(find navrover_gazebo)/worlds:$(optenv GAZEBO_RESOURCE_PATH)"/>
+
+  <!-- Spawn the robot model -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description -urdf -model rover -z 0.22"
+        output="screen" />
+
+</launch>

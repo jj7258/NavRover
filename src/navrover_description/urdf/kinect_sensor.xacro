@@ -52,7 +52,7 @@
     <visual>
      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
       <geometry>
-       <mesh filename="package://navrover_simulation/meshes/sensors/kinect.dae"/>
+       <mesh filename="package://navrover_description/meshes/sensors/kinect.dae"/>
       </geometry>
     </visual>
 	  <collision>

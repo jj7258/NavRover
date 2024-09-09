@@ -1,44 +1,14 @@
 <launch>
-  <arg name="model" default="$(find navrover_simulation)/urdf/rover.xacro"/>
-  <arg name="gui" default="true"/>
-  <arg name="rvizconfig" default="$(find navrover_simulation)/rviz/octomap.rviz"/>
 
-  <!-- Load the URDF into the ROS Parameter Server -->
-  <param name="robot_description"
-         command="$(find xacro)/xacro --inorder '$(find navrover_simulation)/urdf/rover.xacro'" />
+  <arg name="rvizconfig" default="$(find navrover_simulation)/rviz/octomap.rviz"/> <!-- RViz configuration file -->
+  <arg name="world" default="gazebo.launch"/> <!-- Gazebo world file -->
 
-  <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find navrover_simulation)/config/rover_control.yaml" command="load"/>
+  <!-- Argument for the Gazebo launch file -->
+  <arg name="gazebo_launch_file" default="$(find navrover_gazebo)/launch/$(arg world)"/> 
+ 
+  <!-- Load the Gazebo World -->
+  <include file="$(arg gazebo_launch_file)"/>
 
-  <!-- Load the controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/rover" args="joint_state_controller
-                                      left_rocker_position_controller
-                                      right_rocker_position_controller"/>
-
-  <!-- Add joint_state_publisher node -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
-
-  <!-- Convert joint states to TF transforms for rviz, etc -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-        respawn="false" output="screen">
-    <remap from="/joint_states" to="/rover/joint_states" />
-  </node>
-
-  <!-- Run Gazebo -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find navrover_simulation)/worlds/teleop.world"/>
-    <arg name="paused" value="false"/>
-    <arg name="use_sim_time" value="true"/>
-    <arg name="gui" value="true"/>
-    <arg name="headless" value="false"/>
-    <arg name="debug" value="false"/>
-  </include>
-
-  <!-- Spawn the robot model -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
-        args="-param robot_description -urdf -model rover "
-        output="screen" />
 
   <!-- Launch RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>

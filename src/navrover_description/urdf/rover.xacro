@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rover">
 
-  <xacro:include filename="$(find navrover_simulation)/urdf/rover.gazebo" />  
-  <xacro:include filename="$(find navrover_simulation)/urdf/kinect_sensor.xacro" />
+  <xacro:include filename="$(find navrover_description)/urdf/rover.gazebo" />  
+  <xacro:include filename="$(find navrover_description)/urdf/kinect_sensor.xacro" />
   <xacro:property name="PI" value="3.1415926535897931"/>
   
   <xacro:macro name="default_inertial" params="mass">
