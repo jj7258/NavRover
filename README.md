@@ -6,13 +6,18 @@ NavRover is a ROS-based autonomous rover project aimed at advanced navigation an
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Future Scope](#future-scope)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installing ROS Noetic & Necessary Packages](#installing-ros-noetic--necessary-packages)
   - [Installation](#installation)
 - [Usage](#usage)
   - [Simulation & Teleoperation](#simulation--teleoperation)
-  - [Navigation](#navigation)
+  - [2D Mapping](#2d-mapping)
+  - [2D Navigation](#2d-navigation)
+  - [3D Mapping via OctoMap](#3d-mapping-via-octomap)
+  - [3D Mapping via RTAB-Map](#3d-mapping-via-rtab-map)
+  - [Navigation with RTAB-Map](#navigation-with-rtab-map)
 - [Architecture](#architecture)
 - [Contributing](#contributing)
 - [License](#license)
@@ -45,9 +50,11 @@ NavRover is a versatile rover designed to perform autonomous navigation and mapp
 - **Teleoperation**: Allows remote control via *teleop_twist_keyboard* node.
 - **Simulation**: Complete simulation capabilities using Gazebo.
 - **3D Mapping (OctoMap and Real-Time Appearance Based Mapping RTAB-Map)**: Generates and navigates detailed 3D maps using Kinect Sensor data.
-- **Autonomous Navigation Based on 3D Maps**: 3D Maps are converted to detailed 2D Maps on which autonomous navigation will be performed on.
+- **Autonomous Navigation Based on 3D Maps**: 3D Maps are converted to detailed 2D Maps on which autonomous navigation will be performed.
 
-## Future Scope (Will be implemented in near future in any order)
+## Future Scope
+
+*NOTE: Would be implemented in any order, in the near future*
 
 1. Implementation of Gaussian Splatting.
 2. Implementation of custom depth/stereo-camera sensor.
@@ -114,7 +121,7 @@ Please refer to this [YouTube video](https://youtu.be/Jbyb0kQXhJU?si=8C96k2CQqmo
 
 ### 2D Mapping
 
-1. Launch the simulation environment and GMapping node together (By default it opens to gazebo.launch, the argument is world:=):
+1. Launch the simulation environment and GMapping node together (By default it opens to gazebo.launch, the argument is _world:=_):
 
     ```bash
     roslaunch navrover_simulation 2d_mapping.launch
@@ -162,7 +169,7 @@ Please refer to this [YouTube video](https://youtu.be/Jbyb0kQXhJU?si=8C96k2CQqmo
 
 ### 3D Mapping via OctoMap
 
-1. Launch the simulation environment an OctoMapping node:
+1. Launch the simulation environment and OctoMapping node:
 
     ```bash
     roslaunch navrover_simulation octomap.launch
@@ -198,7 +205,7 @@ Please refer to this [YouTube video](https://youtu.be/Jbyb0kQXhJU?si=8C96k2CQqmo
     roslaunch navrover_gazebo nights_and_weekends_world.launch
     ```
 
-2. Launch the RTAB-Map Mapping node with Rviz (To delete the database, add the following argument at the end 'delete:=--delete_db_on_start):
+2. Launch the RTAB-Map Mapping node with Rviz (To delete the database, add the following argument at the end _delete:=--delete_db_on_start_):
 
     ```bash
     roslaunch navrover_rtab_package rtabmap_mapping.launch
@@ -206,7 +213,7 @@ Please refer to this [YouTube video](https://youtu.be/Jbyb0kQXhJU?si=8C96k2CQqmo
 
     OR
 
-    Launch the RTAB-Map Mapping node with Rtabmap_viz(To delete the database, add the following argument at the end 'delete:=--delete_db_on_start'):
+    Launch the RTAB-Map Mapping node with Rtabmap_viz(To delete the database, add the following argument at the end _delete:=--delete_db_on_start_):
 
     ```bash
     roslaunch navrover_rtab_package rtabmap.launch
@@ -222,15 +229,22 @@ Please refer to this [YouTube video](https://youtu.be/Jbyb0kQXhJU?si=8C96k2CQqmo
 
 ### Navigation with RTAB-Map
 
-    RTAB-Map creates the .yaml and .png corresponding to the 3D map created, these files are then used for performing normal autonomous navigation
-
+1. Browse the data using the database viewer, to access it run the following command:
+   
+    ```bash
+    rtabmap-databaseViewer ~/.ros/<database_name>.db
+    ```
+   **NOTE: By default it's rtabmap.db, but here in both rtabmap launch files it is gazebo.db, but you can change it accordingly.**
+   
+   *NOTE: RTAB-Map creates the .yaml and .png corresponding to the 3D map created when exported, these files are then used for performing normal autonomous navigation.*
+    
 1. Launch the simulation environment:
 
     ```bash
     roslaunch navrover_gazebo gazebo.launch
     ```
 
-2. Launch the RTAB-Map based 2D Nav launch file:
+2. Launch the RTAB-Map-based 2D Nav launch file:
 
     ```bash
     roslaunch navrover_rtab_package rtabmap_2d_nav.launch
@@ -252,10 +266,10 @@ NavRover consists of several packages, each with a specific role:
 
 - **navrover_control**: Control parameters for the rover's rocker arms.
 - **navrover_description**: URDF and Xacro files for the rover.
-- **navrover_gazebo**: Consists of different simulation worlds, models and gazebo launch files.
+- **navrover_gazebo**: Consists of different simulation worlds, models, and gazebo launch files.
 - **navrover_navigation**: Navigation stack and configurations.
-- **navrover_rtab_package**: RTAB-Map Launch files based on the rover's currerent configuration.
-- **navrover_simulation**: Contains the single execution launch files for 2D Mapping, Octomapping. Furthermore it also had the GMapping and display launch files, with the corresponding Rviz parameter files.
+- **navrover_rtab_package**: RTAB-Map Launch files based on the rover's current configuration.
+- **navrover_simulation**: Contains the single execution launch files for 2D Mapping, Octomapping. Furthermore, it also had the GMapping and display launch files, with the corresponding Rviz parameter files.
 - **octomap_mapping_navrover**: Includes the octomap_mapping and octomap_server, necessary for mapping and saving the environment in octomap format.
 
 ## Contributing
