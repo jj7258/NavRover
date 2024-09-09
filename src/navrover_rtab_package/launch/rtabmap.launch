@@ -2,12 +2,12 @@
 
     <arg name="database_path"       default="gazebo.db"/>
     <arg name="args"                default=""/>
-    
+    <arg name="delete"                default=""/>  
     <arg name="wait_for_transform"  default="0.2"/>
 
   <!-- RTAB-Map -->
   <group ns="rtabmap">
-    <node name="rtabmap" pkg="rtabmap_slam" type="rtabmap" output="screen" args="--delete_db_on_start">
+    <node name="rtabmap" pkg="rtabmap_slam" type="rtabmap" output="screen" args="$(arg delete)">
       <param name="frame_id" type="string" value="base_footprint"/>
       <param name="subscribe_depth" type="bool" value="true"/>
       <param name="subscribe_scan" type="bool" value="true"/>
