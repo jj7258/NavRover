@@ -209,7 +209,7 @@ Please refer to this [YouTube video](https://youtu.be/Jbyb0kQXhJU?si=8C96k2CQqmo
     Launch the RTAB-Map Mapping node with Rtabmap_viz(To delete the database, add the following argument at the end 'delete:=--delete_db_on_start'):
 
     ```bash
-    roslaunch navrover_rtab_package rtabmap_.launch
+    roslaunch navrover_rtab_package rtabmap.launch
     ```
 
 3. Launch the teleoperation node:
