@@ -1,27 +1,74 @@
-# Description: Dockerfile for the ROS noetic image with some additional packages
-FROM osrf/ros:noetic-full
+# Stage 1: Base image with ROS and dependencies
+FROM osrf/ros:noetic-desktop-full AS base
 
-# Metadata
-LABEL maintainer="Your Name <your.email@example.com>"
-LABEL description="Dockerfile for the NavRover based on ROS Noetic"
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    && add-apt-repository ppa:oibaf/graphics-drivers \
+    && apt-get update && apt-get install -y \
+    mesa-utils \
+    x11-apps \
+    xvfb \
+    qt5-default \
+    libgl1-mesa-glx \
+    libgl1-mesa-dri \
+    libglu1-mesa \
+    nano \
+    git \
+    python3-pip \
+    python3-catkin-tools \
+    ros-noetic-teleop-twist-keyboard \
+    ros-noetic-ros-control \
+    ros-noetic-ros-controllers \
+    ros-noetic-gmapping \
+    ros-noetic-navigation \
+    ros-noetic-map-server \
+    ros-noetic-octomap \
+    ros-noetic-octomap-ros \
+    ros-noetic-octomap-mapping \
+    ros-noetic-octomap-server \
+    ros-noetic-octomap-rviz-plugins \
+    ros-noetic-octomap-msgs \
+    ros-noetic-rtabmap-ros \
+    && rm -rf /var/lib/apt/lists/*
 
-# Update package list and install nano
-RUN apt-get update && apt-get install -y nano && rm -rf /var/lib/apt/lists/*
+# Set environment variables for Qt and display
+ENV QT_X11_NO_MITSHM=1
+ENV DISPLAY=:0
+ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 
-# Create a new user and set up the home directory
-RUN useradd -ms /bin/bash rosuser
+# Stage 2: Clone repository
+FROM base AS clone
+RUN mkdir -p /root/catkin_ws/src
+WORKDIR /root/catkin_ws/src
+RUN echo "Cloning NavRover repository..." && \
+    git clone https://github.com/jj7258/NavRover.git --progress && \
+    echo "Repository cloned successfully."
 
-# Set the working directory
-WORKDIR /home/rosuser/app
+# Stage 3: Build workspace
+FROM clone AS build
+WORKDIR /root/catkin_ws
+RUN echo "Building catkin workspace..." && \
+    /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin build -j2" && \
+    echo "Catkin workspace built successfully."
 
-# Copy files from the local filesystem to the Docker image
-COPY . /home/rosuser/app
+# Stage 4: Final image
+FROM build AS final
 
-# Change ownership of the copied files to the new user
-RUN chown -R rosuser:rosuser /home/rosuser/app
+# Setup environment
+RUN echo "Setting up ROS environment..." && \
+    echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc && \
+    echo "source /root/catkin_ws/devel/setup.bash" >> /root/.bashrc && \
+    echo "ROS environment setup complete."
 
-# Switch to the new user
-USER rosuser
+# Create XDG_RUNTIME_DIR for GUI applications
+RUN mkdir -p /tmp/runtime-root && chmod 0700 /tmp/runtime-root
 
-# Command to run when the container starts
+# Create and set up the entrypoint script
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 CMD ["bash"]
+# Final message
+RUN echo "NavRover Docker image build complete!"

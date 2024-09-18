@@ -9,6 +9,9 @@
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
 
+  <!-- Run the rtabmap Rviz -->
+  <include file="$(find navrover_rtab_package)/rviz/rtabmap_2d_nav.rviz" />
+
   <arg name="use_map_topic" default="true"/>
   <arg name="scan_topic" default="/scan"/>
 ​
@@ -55,6 +58,8 @@
   </node>
 
   <include file="$(find navrover_navigation)/launch/move_base.launch" />
+
+
 
 
 </launch>
