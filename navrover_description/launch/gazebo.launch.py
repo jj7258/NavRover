@@ -1,13 +1,9 @@
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution
+from launch.actions import ExecuteProcess
 import os
 import xacro
 from ament_index_python.packages import get_package_share_directory
-
 
 def generate_launch_description():
     share_dir = get_package_share_directory('navrover_description')
@@ -31,43 +27,38 @@ def generate_launch_description():
         name='joint_state_publisher'
     )
 
-    gazebo_server = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare('gazebo_ros'),
-                'launch',
-                'gzserver.launch.py'
-            ])
-        ]),
-        launch_arguments={
-            'pause': 'true'
-        }.items()
+    # Gazebo Harmonic launch
+    gazebo = ExecuteProcess(
+        cmd=['gz', 'sim', '-r', '-v', '4'],
+        output='screen'
     )
 
-    gazebo_client = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare('gazebo_ros'),
-                'launch',
-                'gzclient.launch.py'
-            ])
-        ])
-    )
-
-    urdf_spawn_node = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
+    # Spawn the robot in Gazebo Harmonic
+    spawn_entity = Node(
+        package='ros_gz_sim',
+        executable='create',
         arguments=[
-            '-entity', 'navrover',
-            '-topic', 'robot_description'
+            '-name', 'navrover',
+            '-topic', 'robot_description',
+            '-x', '0.0',
+            '-y', '0.0',
+            '-z', '0.1'
         ],
+        output='screen'
+    )
+
+    # Bridge to connect ROS 2 and Gazebo
+    bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock'],
         output='screen'
     )
 
     return LaunchDescription([
         robot_state_publisher_node,
         joint_state_publisher_node,
-        gazebo_server,
-        gazebo_client,
-        urdf_spawn_node,
+        gazebo,
+        spawn_entity,
+        bridge,
     ])
