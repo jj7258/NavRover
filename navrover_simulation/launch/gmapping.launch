@@ -1,0 +1,37 @@
+<launch>
+
+    <param name="use_sim_time" value="true"/> <!-- Use simulation time -->
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen"> <!-- Launch the gmapping node -->
+      <!-- <remap from="scan" to="base_scan"/> -->
+      <param name="base_frame" value="base_link"/> <!-- Set the base frame -->
+      <param name="odom_frame" value="odom"/> <!-- Set the odometry frame -->
+      <param name="map_update_interval" value="5.0"/> <!-- Set the map update interval -->
+      <param name="maxUrange" value="16.0"/> <!-- Set the maximum range of the laser -->
+      <param name="sigma" value="0.05"/> <!-- Set the sigma value -->
+      <param name="kernelSize" value="1"/> <!-- Set the kernel size -->
+      <param name="lstep" value="0.05"/> <!-- Set the linear step -->
+      <param name="astep" value="0.05"/> <!-- Set the angular step -->
+      <param name="iterations" value="5"/> <!-- Set the number of iterations -->
+      <param name="lsigma" value="0.075"/> <!-- Set the linear sigma value -->
+      <param name="ogain" value="3.0"/> <!-- Set the ogain value -->
+      <param name="lskip" value="0"/> <!-- Set the lskip value -->
+      <param name="srr" value="0.1"/> <!-- Set the srr value -->
+      <param name="srt" value="0.2"/> <!-- Set the srt value -->
+      <param name="str" value="0.1"/> <!-- Set the str value -->
+      <param name="stt" value="0.2"/> <!-- Set the stt value -->
+      <param name="linearUpdate" value="1.0"/> <!-- Set the linear update value -->
+      <param name="angularUpdate" value="0.5"/> <!-- Set the angular update value -->
+      <param name="temporalUpdate" value="3.0"/> <!-- Set the temporal update value -->
+      <param name="resampleThreshold" value="0.5"/> <!-- Set the resample threshold -->
+      <param name="particles" value="30"/> <!-- Set the number of particles -->
+      <param name="xmin" value="-50.0"/> <!-- Set the minimum x value -->
+      <param name="ymin" value="-50.0"/> <!-- Set the minimum y value -->
+      <param name="xmax" value="50.0"/> <!-- Set the maximum x value -->
+      <param name="ymax" value="50.0"/> <!-- Set the maximum y value -->
+      <param name="delta" value="0.05"/> <!-- Set the delta value -->
+      <param name="llsamplerange" value="0.01"/> <!-- Set the llsamplerange value -->
+      <param name="llsamplestep" value="0.01"/> <!-- Set the llsamplestep value -->
+      <param name="lasamplerange" value="0.005"/> <!-- Set the lasamplerange value -->
+      <param name="lasamplestep" value="0.005"/> <!-- Set the lasamplestep value -->
+    </node>
+</launch>

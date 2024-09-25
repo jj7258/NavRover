@@ -1,0 +1,13 @@
+<launch>
+
+  <!-- Load the map file -->
+  <arg name="map_file" default="$(find navrover_navigation)/maps/nights_and_weekends_s5.yaml"/>
+  <!-- <arg name="map_file" default="$(find navrover_navigation)/maps/teleop.yaml"/> -->
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!-- Run the Rviz-->
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find navrover_navigation)/rviz/map_viewer.rviz" required="true"/> -->
+
+</launch>

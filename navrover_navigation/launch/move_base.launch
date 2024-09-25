@@ -1,0 +1,24 @@
+<launch>
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find navrover_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find navrover_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find navrover_navigation)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find navrover_navigation)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find navrover_navigation)/config/base_local_planner_params.yaml" command="load" />
+    
+    <!-- Add these parameters to adjust frequencies and enable recovery behaviors -->
+    <param name="controller_frequency" value="10.0" />
+    <param name="planner_frequency" value="5.0" />
+    <param name="recovery_behavior_enabled" value="true" />
+    <param name="clearing_rotation_allowed" value="true" />
+    <param name="oscillation_timeout" value="10.0" />
+    <param name="oscillation_distance" value="0.2" />
+    
+    <!-- Optionally, switch to DWA planner for potentially better performance -->
+    <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> -->
+    <!-- <rosparam file="$(find navrover_navigation)/config/dwa_local_planner_params.yaml" command="load" /> -->
+
+    <!-- Add move_slow_and_clear recovery behavior -->
+    <rosparam file="$(find navrover_navigation)/config/recovery_behaviors.yaml" command="load" />
+  </node>
+</launch>

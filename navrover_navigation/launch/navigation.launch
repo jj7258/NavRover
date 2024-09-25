@@ -1,0 +1,14 @@
+<launch>
+    <!--Launch Rviz-->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find navrover_navigation)/rviz/test.rviz" required="true"/> 
+
+    <!--Launch the AMCL+Map_Loader-->
+    <include file="$(find navrover_navigation)/launch/amcl_plus_map_loader.launch" />
+
+    <!-- Launch the move_base node-->
+    <include file="$(find navrover_navigation)/launch/move_base.launch" />
+
+    <!-- <include file="$(find navrover_navigation)/launch/dwa_move_base.launch" /> -->
+
+
+</launch>

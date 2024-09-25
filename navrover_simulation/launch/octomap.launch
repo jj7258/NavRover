@@ -1,0 +1,22 @@
+<launch>
+
+  <arg name="rvizconfig" default="$(find navrover_simulation)/rviz/octomap.rviz"/> <!-- RViz configuration file -->
+  <arg name="world" default="gazebo.launch"/> <!-- Gazebo world file -->
+
+  <!-- Argument for the Gazebo launch file -->
+  <arg name="gazebo_launch_file" default="$(find navrover_gazebo)/launch/$(arg world)"/> 
+ 
+  <!-- Load the Gazebo World -->
+  <include file="$(arg gazebo_launch_file)"/>
+
+
+  <!-- Launch RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+
+  <!-- Launch the gmapping node -->
+  <include file="$(find navrover_simulation)/launch/gmapping.launch"/>
+
+  <!-- Launch the OctoMapping Node-->
+  <include file="$(find octomap_server)/launch/octomap_mapping.launch"/>
+
+</launch>

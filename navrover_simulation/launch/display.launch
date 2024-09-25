@@ -1,0 +1,14 @@
+<launch>
+
+  <arg name="model" default="$(find navrover_description)/urdf/rover.xacro"/> <!-- Path to the URDF file -->
+  <arg name="gui" default="true"/> <!-- Set to true to launch the GUI -->
+  <arg name="rvizconfig" default="$(find navrover_simulation)/launch/urdf.rviz"/> <!-- Path to the RViz configuration file -->
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/> <!-- Load the URDF model -->
+  <param name="use_gui" value="$(arg gui)"/> <!-- Set to true to launch the GUI -->
+
+
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/> <!-- Launch the joint state publisher GUI -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/> <!-- Launch the robot state publisher -->
+  <node name="rviz" pkg="rviz" args="-d $(arg rvizconfig)" type="rviz" required="true"/> <!-- Launch RViz -->
+</launch>

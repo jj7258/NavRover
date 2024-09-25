@@ -1,0 +1,19 @@
+<launch>
+
+  <arg name="model" default="$(find navrover_description)/urdf/rover.xacro"/> <!-- Path to the URDF file -->
+  <arg name="gui" default="true"/> <!-- Set to true to launch the GUI -->
+  <arg name="rvizconfig" default="$(find navrover_simulation)/rviz/2d_mapping.rviz"/> <!-- Path to the RViz configuration file -->
+  <arg name="world" default="nights_and_weekends_world.launch"/> <!-- Set the world to be launched -->
+
+  <!-- Argument for the Gazebo launch file -->
+  <arg name="gazebo_launch_file" default="$(find navrover_gazebo)/launch/$(arg world)"/> 
+
+  <!-- Load the Gazebo World -->
+  <include file="$(arg gazebo_launch_file)"/> 
+
+  <!-- Launch RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+
+  <!-- Launch the gmapping node -->
+  <include file="$(find navrover_simulation)/launch/gmapping.launch"/>
+</launch>

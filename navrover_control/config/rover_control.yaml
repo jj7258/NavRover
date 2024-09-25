@@ -1,0 +1,14 @@
+rover:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+  
+  left_rocker_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_rocker_joint
+    pid: {p: 8, i: 5, d: 5}
+  
+  right_rocker_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: right_rocker_joint
+    pid: {p: 8, i: 5, d: 5}

@@ -1,0 +1,22 @@
+footprint: [[-0.25, -0.20], [-0.25, 0.20], [0.25, 0.20], [0.25, -0.20]]
+footprint_padding: 0.04  # Reduced
+
+obstacle_range: 6.0  # Increased
+raytrace_range: 6.5  # Increased
+
+inflation_radius: 0.45  # Reduced
+cost_scaling_factor: 2.9  # Reduced to make inflation less aggressive
+
+observation_sources: laser_scan_sensor
+
+laser_scan_sensor: {
+  sensor_frame: lidar_link, 
+  data_type: LaserScan, 
+  topic: /scan, 
+  marking: true, 
+  clearing: true, 
+  min_obstacle_height: 0.03, 
+  max_obstacle_height: 0.6, 
+  obstacle_range: 5.5,
+  raytrace_range: 6.0
+}

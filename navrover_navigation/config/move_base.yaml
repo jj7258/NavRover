@@ -1,0 +1,17 @@
+move_base:
+  base_global_planner: "navfn/NavfnROS"
+  base_local_planner: "base_local_planner/TrajectoryPlannerROS"
+ 
+  planner_frequency: 1.0
+  planner_patience: 5.5  # Slightly reduced
+  oscillation_timeout: 11.0  # Slightly reduced
+  oscillation_distance: 0.30  # Slightly reduced
+
+  # Remove specific recovery behavior configurations from here
+  # Instead, add a reference to your separate recovery behaviors file
+  recovery_behavior_enabled: true
+  recovery_behaviors_file: $(find navrover_navigation)/config/recovery_behaviors.yaml
+
+  # Keep the clearing settings as they are general parameters
+  clearing_rotation_allowed: true
+  clearing_distance: 0.5
