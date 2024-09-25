@@ -1,0 +1,333 @@
+<?xml version="1.0" ?>
+<robot name="navrover" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find navrover_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find navrover_description)/urdf/navrover.trans" />
+<xacro:include filename="$(find navrover_description)/urdf/navrover.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.009504858866791937 -0.002270281447422617 0.1951992873261795" rpy="0 0 0"/>
+    <mass value="0.9518707421963939"/>
+    <inertia ixx="0.005453" iyy="0.006479" izz="0.009221" ixy="8e-06" iyz="-2.3e-05" ixz="1.9e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_front_wheel_1">
+  <inertial>
+    <origin xyz="-8.102817960486952e-07 -0.055271110065370055 4.86858583587102e-07" rpy="0 0 0"/>
+    <mass value="0.7376559494744219"/>
+    <inertia ixx="0.001132" iyy="0.001768" izz="0.001132" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.262818 0.165429 -0.062925" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.262818 0.165429 -0.062925" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_rear_wheel_1">
+  <inertial>
+    <origin xyz="-5.274171592795085e-07 -0.0552717902856055 4.929203514525415e-07" rpy="0 0 0"/>
+    <mass value="0.737655949474422"/>
+    <inertia ixx="0.001132" iyy="0.001768" izz="0.001132" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.245885 0.165394 -0.063543" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.245885 0.165394 -0.063543" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_front_wheel_1">
+  <inertial>
+    <origin xyz="1.5082397214483123e-07 0.05527116640249366 4.929203512721303e-07" rpy="0 0 0"/>
+    <mass value="0.737655949474422"/>
+    <inertia ixx="0.001132" iyy="0.001768" izz="0.001132" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.264518 -0.159147 -0.063543" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.264518 -0.159147 -0.063543" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_front_motor_1">
+  <inertial>
+    <origin xyz="0.0008910668948025613 -0.03289510779057839 -0.06734484283672734" rpy="0 0 0"/>
+    <mass value="0.8027582890758764"/>
+    <inertia ixx="0.000756" iyy="0.000377" izz="0.000565" ixy="1.3e-05" iyz="-4.8e-05" ixz="6.6e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.259316 -0.15026 -0.142476" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_front_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.259316 -0.15026 -0.142476" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_front_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_rear_motor_1">
+  <inertial>
+    <origin xyz="-0.000890443487994802 0.032894483907466535 -0.06734484283672845" rpy="0 0 0"/>
+    <mass value="0.8027582890758764"/>
+    <inertia ixx="0.000756" iyy="0.000377" izz="0.000565" ixy="1.3e-05" iyz="4.8e-05" ixz="-6.6e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.240684 0.156507 -0.142476" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_rear_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.240684 0.156507 -0.142476" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_rear_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_front_motor_1">
+  <inertial>
+    <origin xyz="0.0007239698752933288 0.032862866662436055 -0.06750730161649608" rpy="0 0 0"/>
+    <mass value="0.8025906335235503"/>
+    <inertia ixx="0.000756" iyy="0.000377" izz="0.000564" ixy="-1.3e-05" iyz="4.8e-05" ixz="6.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.259316 0.156507 -0.142476" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_front_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.259316 0.156507 -0.142476" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_front_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_rocker_arm_1">
+  <inertial>
+    <origin xyz="3.5144696139931264e-07 0.022382973970928116 -0.019588062370497872" rpy="0 0 0"/>
+    <mass value="0.4395364357960162"/>
+    <inertia ixx="9.3e-05" iyy="0.008744" izz="0.008788" ixy="-0.0" iyz="-3e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.009316 0.178074 -0.172741" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_rocker_arm_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.009316 0.178074 -0.172741" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/right_rocker_arm_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_rocker_arm_1">
+  <inertial>
+    <origin xyz="2.771584985891695e-07 0.018220417601364836 -0.01958806237049779" rpy="0 0 0"/>
+    <mass value="0.43953643579601614"/>
+    <inertia ixx="9.3e-05" iyy="0.008744" izz="0.008788" ixy="-0.0" iyz="4e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.009316 -0.131926 -0.172741" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_rocker_arm_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.009316 -0.131926 -0.172741" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_rocker_arm_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rover_camera_1">
+  <inertial>
+    <origin xyz="0.0035546971815331313 -2.0100020046076236e-07 0.005792514392284787" rpy="0 0 0"/>
+    <mass value="0.009136932367338056"/>
+    <inertia ixx="1e-06" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.11748 0.003701 -0.19374" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/rover_camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.11748 0.003701 -0.19374" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/rover_camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_rear_motor_1">
+  <inertial>
+    <origin xyz="-0.0007233464684787139 -0.032863490545547894 -0.06750730161649704" rpy="0 0 0"/>
+    <mass value="0.8025906335235503"/>
+    <inertia ixx="0.000756" iyy="0.000377" izz="0.000564" ixy="-1.3e-05" iyz="-4.8e-05" ixz="-6.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.240684 -0.15026 -0.142476" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_rear_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.240684 -0.15026 -0.142476" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_rear_motor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_rear_wheel_1">
+  <inertial>
+    <origin xyz="4.3368860119796793e-07 0.0552714861822573 4.868585825046345e-07" rpy="0 0 0"/>
+    <mass value="0.737655949474422"/>
+    <inertia ixx="0.001132" iyy="0.001768" izz="0.001132" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.244185 -0.159181 -0.062925" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.244185 -0.159181 -0.062925" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find navrover_description)/meshes/left_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="right_front_wheel_joint" type="continuous">
+  <origin xyz="0.003502 -0.008922 -0.079551" rpy="0 0 0"/>
+  <parent link="right_front_motor_1"/>
+  <child link="right_front_wheel_1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+</joint>
+
+<joint name="right_rear_wheel_joint" type="continuous">
+  <origin xyz="-0.005201 -0.008887 -0.078933" rpy="0 0 0"/>
+  <parent link="right_rear_motor_1"/>
+  <child link="right_rear_wheel_1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+</joint>
+
+<joint name="left_front_wheel_joint" type="continuous">
+  <origin xyz="0.005202 0.008887 -0.078933" rpy="0 0 0"/>
+  <parent link="left_front_motor_1"/>
+  <child link="left_front_wheel_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+<joint name="left_front_motor_mount_joint" type="fixed">
+  <origin xyz="0.25 0.018334 -0.030265" rpy="0 0 0"/>
+  <parent link="left_rocker_arm_1"/>
+  <child link="left_front_motor_1"/>
+</joint>
+
+<joint name="right_rear_motor_mount_joint" type="fixed">
+  <origin xyz="-0.25 0.021567 -0.030265" rpy="0 0 0"/>
+  <parent link="right_rocker_arm_1"/>
+  <child link="right_rear_motor_1"/>
+</joint>
+
+<joint name="right_front_motor_mount_joint" type="fixed">
+  <origin xyz="0.25 0.021567 -0.030265" rpy="0 0 0"/>
+  <parent link="right_rocker_arm_1"/>
+  <child link="right_front_motor_1"/>
+</joint>
+
+<joint name="right_rocker_arm_joint" type="revolute">
+  <origin xyz="0.009316 -0.178074 0.172741" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_rocker_arm_1"/>
+  <axis xyz="0.0 -1.0 -0.0"/>
+  <limit upper="0.261799" lower="-0.261799" effort="100" velocity="100"/>
+</joint>
+
+<joint name="left_rocker_arm_joint" type="revolute">
+  <origin xyz="0.009316 0.131926 0.172741" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_rocker_arm_1"/>
+  <axis xyz="0.0 -1.0 -0.0"/>
+  <limit upper="0.261799" lower="-0.261799" effort="100" velocity="100"/>
+</joint>
+
+<joint name="rover_front_camera_joint" type="fixed">
+  <origin xyz="0.11748 -0.003701 0.19374" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rover_camera_1"/>
+</joint>
+
+<joint name="left_rear_motor_mount_joint" type="fixed">
+  <origin xyz="-0.25 0.018334 -0.030265" rpy="0 0 0"/>
+  <parent link="left_rocker_arm_1"/>
+  <child link="left_rear_motor_1"/>
+</joint>
+
+<joint name="left_rear_wheel_joint" type="continuous">
+  <origin xyz="-0.003501 0.008921 -0.079551" rpy="0 0 0"/>
+  <parent link="left_rear_motor_1"/>
+  <child link="left_rear_wheel_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+</robot>
