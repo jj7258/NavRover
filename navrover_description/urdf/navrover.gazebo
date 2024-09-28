@@ -1,94 +1,140 @@
 <?xml version="1.0" ?>
 <robot name="navrover" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-<xacro:property name="body_color" value="Gazebo/Silver" />
+<xacro:property name="body_color" value="Gazebo/White" />
+<xacro:property name="motor_color" value="Gazebo/Silver" />
+<xacro:property name="wheel_color" value="Gazebo/Black" />
+<xacro:property name="camera_color" value="Gazebo/Green" />
 
-<gazebo>
-  <plugin name="control" filename="libgazebo_ros_control.so"/>
-</gazebo>
-<gazebo reference="base_link">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-  <gravity>true</gravity>
-</gazebo>
+  <gazebo>
+    <plugin name="control" filename="libgazebo_ros_control.so"/>
+  </gazebo>
+  <gazebo reference="base_link">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+    <gravity>true</gravity>
+  </gazebo>
 
-<gazebo reference="right_front_wheel_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="right_front_wheel_1">
+    <material>${wheel_color}</material>
+    <mu1>3.0</mu1>
+    <mu2>1.0</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="right_rear_wheel_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="right_rear_wheel_1">
+    <material>${wheel_color}</material>
+    <mu1>3.0</mu1>
+    <mu2>1.0</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="left_front_wheel_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="left_front_wheel_1">
+    <material>${wheel_color}</material>
+    <mu1>3.0</mu1>
+    <mu2>1.0</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="left_front_motor_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="left_front_motor_1">
+    <material>${motor_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="right_rear_motor_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="right_rear_motor_1">
+    <material>${motor_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="right_front_motor_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="right_front_motor_1">
+    <material>${motor_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="right_rocker_arm_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="right_rocker_arm_1">
+    <material>${motor_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="left_rocker_arm_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="left_rocker_arm_1">
+    <material>${motor_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="rover_camera_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="rover_camera_1">
+    <material>${camera_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="left_rear_motor_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="left_rear_motor_1">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
 
-<gazebo reference="left_rear_wheel_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
+  <gazebo reference="left_rear_wheel_1">
+    <material>${wheel_color}</material>
+    <mu1>3.0</mu1>
+    <mu2>1.0</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
+
+  <gazebo>
+      <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+
+        <!-- Wheels -->
+        <left_joint>left_front_wheel_joint</left_joint>
+        <left_joint>left_rear_wheel_joint</left_joint>
+        <right_joint>right_front_wheel_joint</right_joint>
+        <right_joint>right_rear_wheel_joint</right_joint>
+
+
+        <!-- Kinematics -->
+        <wheel_separation>0.47594</wheel_separation>
+        <wheel_diameter>0.130</wheel_diameter>
+
+        <!-- Limits -->
+        <max_linear_acceleration>15.0</max_linear_acceleration>
+        <max_angular_acceleration>40.0</max_angular_acceleration>
+        <max_linear_velocity>2.0</max_linear_velocity>
+        <max_angular_velocity>2.0</max_angular_velocity>
+        <!-- <max_torque>15</max_torque>
+        <max_force>15</max_force>
+        <turning_adaptation>0.5</turning_adaptation> -->
+        <wheel_torque>170</wheel_torque>
+
+        <!-- topic, frame, and odometry -->
+        <topic>cmd_vel</topic>
+        <odom_topic>odom</odom_topic>
+        <frame_id>odom</frame_id>
+        <odom_publish_frequency>50</odom_publish_frequency>
+
+            
+      </plugin>
+
+      <plugin filename="gz-sim-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+            <topic>joint_states</topic>
+            <joint_name>left_front_wheel_joint</joint_name>
+            <joint_name>left_rear_wheel_joint</joint_name>
+            <joint_name>right_front_wheel_joint</joint_name>
+            <joint_name>right_rear_wheel_joint</joint_name>
+      </plugin>
+
+  </gazebo>  
 
 </robot>
