@@ -19,22 +19,29 @@
 
   <gazebo reference="right_front_wheel_1">
     <material>${wheel_color}</material>
-    <mu1>3.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
     <self_collide>true</self_collide>
   </gazebo>
 
   <gazebo reference="right_rear_wheel_1">
     <material>${wheel_color}</material>
-    <mu1>3.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
     <self_collide>true</self_collide>
   </gazebo>
 
   <gazebo reference="left_front_wheel_1">
     <material>${wheel_color}</material>
-    <mu1>3.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>2.0</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
+
+  <gazebo reference="left_rear_wheel_1">
+    <material>${wheel_color}</material>
+    <mu1>2.0</mu1>
+    <mu2>2.0</mu2>
     <self_collide>true</self_collide>
   </gazebo>
 
@@ -87,12 +94,7 @@
     <self_collide>true</self_collide>
   </gazebo>
 
-  <gazebo reference="left_rear_wheel_1">
-    <material>${wheel_color}</material>
-    <mu1>3.0</mu1>
-    <mu2>1.0</mu2>
-    <self_collide>true</self_collide>
-  </gazebo>
+
 
   <gazebo>
       <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
@@ -109,14 +111,14 @@
         <wheel_diameter>0.130</wheel_diameter>
 
         <!-- Limits -->
-        <max_linear_acceleration>15.0</max_linear_acceleration>
+        <!-- <max_linear_acceleration>15.0</max_linear_acceleration>
         <max_angular_acceleration>40.0</max_angular_acceleration>
         <max_linear_velocity>2.0</max_linear_velocity>
-        <max_angular_velocity>2.0</max_angular_velocity>
+        <max_angular_velocity>2.0</max_angular_velocity> -->
         <!-- <max_torque>15</max_torque>
         <max_force>15</max_force>
         <turning_adaptation>0.5</turning_adaptation> -->
-        <wheel_torque>170</wheel_torque>
+        <!-- <wheel_torque>170</wheel_torque> -->
 
         <!-- topic, frame, and odometry -->
         <topic>cmd_vel</topic>
