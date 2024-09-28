@@ -6,9 +6,6 @@
 <xacro:property name="wheel_color" value="Gazebo/Black" />
 <xacro:property name="camera_color" value="Gazebo/Green" />
 
-  <gazebo>
-    <plugin name="control" filename="libgazebo_ros_control.so"/>
-  </gazebo>
   <gazebo reference="base_link">
     <material>${body_color}</material>
     <mu1>0.2</mu1>
@@ -17,55 +14,41 @@
     <gravity>true</gravity>
   </gazebo>
 
-  <gazebo reference="right_front_wheel_1">
-    <material>${wheel_color}</material>
-    <mu1>2.0</mu1>
-    <mu2>2.0</mu2>
-    <self_collide>true</self_collide>
-  </gazebo>
+  <!-- Wheel configurations -->
+  <xacro:macro name="wheel_properties" params="prefix">
+    <gazebo reference="${prefix}_wheel_1">
+      <material>${wheel_color}</material>
+      <mu1>1.5</mu1>
+      <mu2>1.5</mu2>
+      <kp>500000.0</kp>
+      <kd>100.0</kd>
+      <fdir1>1 0 0</fdir1>
+      <minDepth>0.005</minDepth>
+      <maxVel>1.5</maxVel>
+    </gazebo>
+  </xacro:macro>
 
-  <gazebo reference="right_rear_wheel_1">
-    <material>${wheel_color}</material>
-    <mu1>2.0</mu1>
-    <mu2>2.0</mu2>
-    <self_collide>true</self_collide>
-  </gazebo>
+  <xacro:wheel_properties prefix="right_front" />
+  <xacro:wheel_properties prefix="right_rear" />
+  <xacro:wheel_properties prefix="left_front" />
+  <xacro:wheel_properties prefix="left_rear" />
 
-  <gazebo reference="left_front_wheel_1">
-    <material>${wheel_color}</material>
-    <mu1>2.0</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
-  </gazebo>
+  <!-- Motor configurations -->
+  <xacro:macro name="motor_properties" params="prefix">
+    <gazebo reference="${prefix}_motor_1">
+      <material>${motor_color}</material>
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <self_collide>true</self_collide>
+    </gazebo>
+  </xacro:macro>
 
-  <gazebo reference="left_rear_wheel_1">
-    <material>${wheel_color}</material>
-    <mu1>2.0</mu1>
-    <mu2>2.0</mu2>
-    <self_collide>true</self_collide>
-  </gazebo>
+  <xacro:motor_properties prefix="left_front" />
+  <xacro:motor_properties prefix="right_rear" />
+  <xacro:motor_properties prefix="right_front" />
+  <xacro:motor_properties prefix="left_rear" />
 
-  <gazebo reference="left_front_motor_1">
-    <material>${motor_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
-  </gazebo>
-
-  <gazebo reference="right_rear_motor_1">
-    <material>${motor_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
-  </gazebo>
-
-  <gazebo reference="right_front_motor_1">
-    <material>${motor_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
-  </gazebo>
-
+  <!-- Other components -->
   <gazebo reference="right_rocker_arm_1">
     <material>${motor_color}</material>
     <mu1>0.2</mu1>
@@ -87,56 +70,67 @@
     <self_collide>true</self_collide>
   </gazebo>
 
-  <gazebo reference="left_rear_motor_1">
-    <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
+  <gazebo>
+    <plugin filename="libleo_gz_differential_plugin.so" name="leo_gz::DifferentialSystem">
+      <jointA>left_rocker_arm_joint</jointA>
+      <jointB>right_rocker_arm_joint</jointB>
+      <forceConstant>75.0</forceConstant>
+    </plugin>
   </gazebo>
 
-
-
   <gazebo>
-      <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+    <!-- Joint state publisher -->
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <topic>joint_states</topic>
+      <publish_rate>50</publish_rate>
+      <joint_name>left_front_wheel_joint</joint_name>
+      <joint_name>left_rear_wheel_joint</joint_name>
+      <joint_name>right_front_wheel_joint</joint_name>
+      <joint_name>right_rear_wheel_joint</joint_name>
+      <joint_name>right_rocker_arm_joint</joint_name>
+      <joint_name>left_rocker_arm_joint</joint_name>
+    </plugin>
 
-        <!-- Wheels -->
-        <left_joint>left_front_wheel_joint</left_joint>
-        <left_joint>left_rear_wheel_joint</left_joint>
-        <right_joint>right_front_wheel_joint</right_joint>
-        <right_joint>right_rear_wheel_joint</right_joint>
+    <!-- Add joint controllers for each wheel -->
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>left_front_wheel_joint</joint_name>
+      <joint_name>left_rear_wheel_joint</joint_name>
+      <joint_name>right_front_wheel_joint</joint_name>
+      <joint_name>right_rear_wheel_joint</joint_name>
+      <use_velocity_commands>true</use_velocity_commands> 
+    </plugin>
 
+    <!-- Add a plugin to convert cmd_vel to individual wheel velocities -->
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
 
-        <!-- Kinematics -->
-        <wheel_separation>0.47594</wheel_separation>
-        <wheel_diameter>0.130</wheel_diameter>
+      <!-- Joints -->
+      <left_joint>left_front_wheel_joint</left_joint>
+      <left_joint>left_rear_wheel_joint</left_joint>
+      <right_joint>right_front_wheel_joint</right_joint>
+      <right_joint>right_rear_wheel_joint</right_joint>
 
-        <!-- Limits -->
-        <!-- <max_linear_acceleration>15.0</max_linear_acceleration>
-        <max_angular_acceleration>40.0</max_angular_acceleration>
-        <max_linear_velocity>2.0</max_linear_velocity>
-        <max_angular_velocity>2.0</max_angular_velocity> -->
-        <!-- <max_torque>15</max_torque>
-        <max_force>15</max_force>
-        <turning_adaptation>0.5</turning_adaptation> -->
-        <!-- <wheel_torque>170</wheel_torque> -->
+      <!-- Wheel separation and radius -->
+      <wheel_separation>0.324328</wheel_separation>
+      <wheel_radius>0.065</wheel_radius>
 
-        <!-- topic, frame, and odometry -->
-        <topic>cmd_vel</topic>
-        <odom_topic>odom</odom_topic>
-        <frame_id>odom</frame_id>
-        <odom_publish_frequency>50</odom_publish_frequency>
+      <!-- Odom publish frequency and max linear velocity -->
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <max_linear_velocity>1.5</max_linear_velocity>  
+      <min_linear_velocity>-1.5</min_linear_velocity>
+      <max_angular_velocity>6.0</max_angular_velocity>
+      <min_angular_velocity>-6.0</min_angular_velocity>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+      <min_wheel_acceleration>-10.0</min_wheel_acceleration>
+      <max_wheel_torque>2.767</max_wheel_torque>
 
-            
-      </plugin>
-
-      <plugin filename="gz-sim-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
-            <topic>joint_states</topic>
-            <joint_name>left_front_wheel_joint</joint_name>
-            <joint_name>left_rear_wheel_joint</joint_name>
-            <joint_name>right_front_wheel_joint</joint_name>
-            <joint_name>right_rear_wheel_joint</joint_name>
-      </plugin>
-
-  </gazebo>  
+      <!-- Topics, Odom, Wheel TF, etc. -->
+      <topic>cmd_vel</topic>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>false</publish_wheel_tf>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </gazebo>
 
 </robot>

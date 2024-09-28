@@ -306,9 +306,8 @@
   <origin xyz="0.003502 -0.008922 -0.079551" rpy="0 0 0"/>
   <parent link="right_front_motor_1"/>
   <child link="right_front_wheel_1"/>
-  <axis xyz="0.0 1.0 0.0"/>
-  <limit effort="100" velocity="100"/>
-  <dynamics friction="1.0" damping="0.1"/>
+  <axis xyz="0 1 0"/>
+  <dynamics damping="0.001" friction="0.01"/>
 </joint>
 
 <joint name="right_rear_wheel_joint" type="continuous">
@@ -316,8 +315,7 @@
   <parent link="right_rear_motor_1"/>
   <child link="right_rear_wheel_1"/>
   <axis xyz="0.0 1.0 0.0"/>
-  <limit effort="100" velocity="100"/>
-  <dynamics friction="1.0" damping="0.1"/>
+  <dynamics damping="0.001" friction="0.01"/>
 </joint>
 
 <joint name="left_front_wheel_joint" type="continuous">
@@ -325,8 +323,7 @@
   <parent link="left_front_motor_1"/>
   <child link="left_front_wheel_1"/>
   <axis xyz="0.0 1.0 0.0"/>
-  <limit effort="100" velocity="100"/>
-  <dynamics friction="1.0" damping="0.1"/>
+  <dynamics damping="0.001" friction="0.01"/>
 </joint>
 
 <joint name="left_rear_wheel_joint" type="continuous">
@@ -334,8 +331,7 @@
   <parent link="left_rear_motor_1"/>
   <child link="left_rear_wheel_1"/>
   <axis xyz="0.0 1.0 0.0"/>
-  <limit effort="100" velocity="100"/>
-  <dynamics friction="1.0" damping="0.1"/>
+  <dynamics damping="0.001" friction="0.01"/>
 </joint>
 
 </robot>

@@ -12,6 +12,9 @@
   <depend>joint_state_publisher</depend>
   <depend>joint_state_publisher_gui</depend>
 
+  <depend>gz_plugin_vendor</depend>
+  <depend>gz_sim_vendor</depend>
+
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
