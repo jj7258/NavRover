@@ -1,59 +1,38 @@
 controller_manager:
   ros__parameters:
-    update_rate: 100
+    update_rate: 100  # Rate at which the controllers are updated
+    use_sim_time: true
 
-    left_front_wheel_controller:
-      type: "effort_controllers/JointEffortController"
-      joint: "left_front_wheel_joint"
-      pid:
-        p: 100.0
-        i: 0.0
-        d: 0.0
-        i_clamp: 0.0
+    # Joint State Broadcaster
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
 
-    left_rear_wheel_controller:
-      type: "effort_controllers/JointEffortController"
-      joint: "left_rear_wheel_joint"
-      pid:
-        p: 100.0
-        i: 0.0
-        d: 0.0
-        i_clamp: 0.0
-
-    right_front_wheel_controller:
-      type: "effort_controllers/JointEffortController"
-      joint: "right_front_wheel_joint"
-      pid:
-        p: 100.0
-        i: 0.0
-        d: 0.0
-        i_clamp: 0.0
-
-    right_rear_wheel_controller:
-      type: "effort_controllers/JointEffortController"
-      joint: "right_rear_wheel_joint"
-      pid:
-        p: 100.0
-        i: 0.0
-        d: 0.0
-        i_clamp: 0.0
-
-    joint_state_controller:
-      type: joint_state_controller/JointStateController
-      publish_rate: 50
-
+    # Left Rocker Arm Position Controller
     left_rocker_position_controller:
-      type: effort_controllers/JointPositionController
-      joint: left_rocker_arm_joint
-      pid:
+      type: effort_controllers/JointPositionController  # Use of effort controller
+      joint: left_rocker_arm_joint  # Name of the joint in the URDF/XACRO
+      command_interfaces: 
+        - effort  # Command interface for the effort controller
+      state_interfaces: 
+        - position  # State interface to report position
+      pid:  # PID parameters for control
         p: 8.0
         i: 5.0
         d: 5.0
 
+    # Right Rocker Arm Position Controller
     right_rocker_position_controller:
-      type: effort_controllers/JointPositionController
-      joint: right_rocker_arm_joint
-      pid:
+      type: effort_controllers/JointPositionController  # Use of effort controller
+      joint: right_rocker_arm_joint  # Name of the joint in the URDF/XACRO
+      command_interfaces: 
+        - effort  # Command interface for the effort controller
+      state_interfaces: 
+        - position  # State interface to report position
+      pid:  # PID parameters for control
         p: 8.0
         i: 5.0
         d: 5.0
+    
+
+
+  

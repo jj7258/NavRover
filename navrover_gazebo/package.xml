@@ -3,17 +3,50 @@
 <package format="3">
 <name>navrover_gazebo</name>
   <version>0.0.0</version>
-<description>The navrover_gazebo package</description>
+  <description>The navrover_gazebo package</description>
   <maintainer email="joelgj02@gmail.com">Joel Georgie Jacob</maintainer>
   <license>TODO: License declaration</license>
 
-  <depend>xacro</depend>
-  <depend>robot_state_publisher</depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <build_depend>control_msgs</build_depend>
+  <build_depend>rclcpp</build_depend>
+  <build_depend>rclcpp_action</build_depend>
+
+
   <depend>joint_state_publisher</depend>
   <depend>joint_state_publisher_gui</depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
 
   <depend>gz_plugin_vendor</depend>
   <depend>gz_sim_vendor</depend>
+
+  <depend>controller_manager</depend>
+
+
+  <!-- ros2_control-->
+  <depend>ros2_control</depend>
+  <depend>ros2_controllers</depend>
+
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>control_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>hardware_interface</exec_depend>
+  <exec_depend>gz_ros2_control</exec_depend>
+  <exec_depend>joint_state_broadcaster</exec_depend>
+  <exec_depend>joint_trajectory_controller</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>launch_testing_ament_cmake</exec_depend>
+  <exec_depend>python3-psutil</exec_depend>
+  <exec_depend>python3-pytest</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros2controlcli</exec_depend>
+  <exec_depend>xacro</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

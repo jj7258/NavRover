@@ -4,6 +4,9 @@
 <xacro:include filename="$(find navrover_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find navrover_description)/urdf/navrover.trans" />
 <xacro:include filename="$(find navrover_description)/urdf/navrover.gazebo" />
+<xacro:include filename="$(find navrover_control)/description/ros2_control.xacro" />
+
+
 <link name="base_link">
   <inertial>
     <origin xyz="0.009504858866791937 -0.002270281447422617 0.1951992873261795" rpy="0 0 0"/>

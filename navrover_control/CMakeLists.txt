@@ -7,12 +7,23 @@ endif()
 
 # Find dependencies
 find_package(ament_cmake REQUIRED)
-# find_package(rclcpp REQUIRED)  # Add any other necessary dependencies
-# find_package(gz_ros REQUIRED)  # If using Gazebo
-# find_package(controller_interface REQUIRED)  # If using ROS 2 control
+find_package(ament_index_cpp REQUIRED)
+find_package(rclcpp REQUIRED)  # Add any other necessary dependencies
+find_package(controller_manager REQUIRED)
+find_package(hardware_interface REQUIRED)
+find_package(pluginlib REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(yaml_cpp_vendor REQUIRED)
+
+find_package(gz_sim_vendor REQUIRED)
+find_package(gz-sim REQUIRED)
+
+find_package(gz_plugin_vendor REQUIRED)
+find_package(gz-plugin REQUIRED)
+
 install(
     DIRECTORY config description
-    DESTINATION share/$(PROJECT_NAME)
+    DESTINATION share/${PROJECT_NAME}
 )
 
 # Uncomment the following line in order to fill in

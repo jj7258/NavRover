@@ -5,10 +5,14 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 import os
+import re
 import xacro
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
+    
+        
+
     
     robotXacroName = 'navrover' # Name of the xacro file
     # share_dir = get_package_share_directory('navrover_description')
@@ -24,7 +28,16 @@ def generate_launch_description():
     
     pathModelFile = os.path.join(get_package_share_directory(namePackage), modelFileRelativePath)
     
+    
     robotDescription = xacro.process_file(pathModelFile).toxml()
+    
+    # def remove_comments(text):
+    #     pattern = r'<!--(.*?)-->'
+    #     return re.sub(pattern, '', text, flags=re.DOTALL)
+
+    # # Remove comments from the robot description
+    # robotDescription = remove_comments()
+
 
 
     # Gazebo Harmonic launch
@@ -58,6 +71,7 @@ def generate_launch_description():
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='robot_state_publisher',
+        output='screen',
         parameters=[
             {'robot_description': robotDescription,
              'use_sim_time': True}])
@@ -90,6 +104,14 @@ def generate_launch_description():
         ],
         output='screen'
     )
+    
+    controller_manager = Node(
+        package='controller_manager',
+        executable='ros2_control_node',
+        parameters=[robotDescription, os.path.join(get_package_share_directory('navrover_control'), 'config', 'navrover_controllers.yaml')],
+        output='screen',
+        remappings=[("~/robot_description", "/robot_description")],
+    )
 
 
     return LaunchDescription([
@@ -98,4 +120,5 @@ def generate_launch_description():
         gazeboLaunch,
         spawn_entity,
         start_gazebo_ros_bridge_cmd,
+        controller_manager,  # Add the controller manager node
     ])

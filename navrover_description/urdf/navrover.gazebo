@@ -14,7 +14,7 @@
     <gravity>true</gravity>
   </gazebo>
 
-  <!-- Wheel configurations -->
+  
   <xacro:macro name="wheel_properties" params="prefix">
     <gazebo reference="${prefix}_wheel_1">
       <material>${wheel_color}</material>
@@ -33,7 +33,7 @@
   <xacro:wheel_properties prefix="left_front" />
   <xacro:wheel_properties prefix="left_rear" />
 
-  <!-- Motor configurations -->
+  
   <xacro:macro name="motor_properties" params="prefix">
     <gazebo reference="${prefix}_motor_1">
       <material>${motor_color}</material>
@@ -48,7 +48,7 @@
   <xacro:motor_properties prefix="right_front" />
   <xacro:motor_properties prefix="left_rear" />
 
-  <!-- Other components -->
+  
   <gazebo reference="right_rocker_arm_1">
     <material>${motor_color}</material>
     <mu1>0.2</mu1>
@@ -79,7 +79,7 @@
   </gazebo>
 
   <gazebo>
-    <!-- Joint state publisher -->
+    
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
       <topic>joint_states</topic>
       <publish_rate>50</publish_rate>
@@ -91,7 +91,7 @@
       <joint_name>left_rocker_arm_joint</joint_name>
     </plugin>
 
-    <!-- Add joint controllers for each wheel -->
+    
     <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
       <joint_name>left_front_wheel_joint</joint_name>
       <joint_name>left_rear_wheel_joint</joint_name>
@@ -100,20 +100,20 @@
       <use_velocity_commands>true</use_velocity_commands> 
     </plugin>
 
-    <!-- Add a plugin to convert cmd_vel to individual wheel velocities -->
+    
     <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
 
-      <!-- Joints -->
+      
       <left_joint>left_front_wheel_joint</left_joint>
       <left_joint>left_rear_wheel_joint</left_joint>
       <right_joint>right_front_wheel_joint</right_joint>
       <right_joint>right_rear_wheel_joint</right_joint>
 
-      <!-- Wheel separation and radius -->
+      
       <wheel_separation>0.324328</wheel_separation>
       <wheel_radius>0.065</wheel_radius>
 
-      <!-- Odom publish frequency and max linear velocity -->
+      
       <odom_publish_frequency>50</odom_publish_frequency>
       <max_linear_velocity>1.5</max_linear_velocity>  
       <min_linear_velocity>-1.5</min_linear_velocity>
@@ -123,7 +123,7 @@
       <min_wheel_acceleration>-10.0</min_wheel_acceleration>
       <max_wheel_torque>2.767</max_wheel_torque>
 
-      <!-- Topics, Odom, Wheel TF, etc. -->
+      
       <topic>cmd_vel</topic>
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
