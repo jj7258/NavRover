@@ -24,18 +24,6 @@
 - **ROS2**: Installed version `Jazzy`
 - **Gazebo**: Harmonic or compatible version
 
-### Installation
-
-1. Clone the repository in the src folder of your workspace:
-
-   ```bash
-   git clone https://github.com/jj7258/NavRover.git
-   ```
-2. Build the workspace using the following command:
-
-   ```bash
-   colcon build
-   ```
 
 ### Installation
 
