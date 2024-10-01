@@ -30,7 +30,8 @@
 1. Clone the  `ros2-jazzy` repository:
 
    ```bash
-   git clone --single-branch --branch ros2-jazzy https://github.com/jj7258/NavRover.git   ```
+   git clone --single-branch --branch ros2-jazzy https://github.com/jj7258/NavRover.git
+   ```
 
 2. Build the package:
 
