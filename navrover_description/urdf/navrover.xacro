@@ -283,7 +283,7 @@
   <child link="right_rocker_arm_1"/>
   <axis xyz="0.0 1.0 0.0"/>
   <limit upper="0.261799" lower="-0.261799" effort="100" velocity="100"/>
-  <!-- <dynamics friction = "1.0" damping = "0.1"/> -->
+  <dynamics friction = "1.0" damping = "0.1"/>
 </joint>
 
 <joint name="left_rocker_arm_joint" type="revolute">
@@ -292,7 +292,7 @@
   <child link="left_rocker_arm_1"/>
   <axis xyz="0.0 1.0 0.0"/>
   <limit upper="0.261799" lower="-0.261799" effort="100" velocity="100"/>
-  <!-- <dynamics friction = "1.0" damping = "0.1"/> -->
+  <dynamics friction = "1.0" damping = "0.1"/>
 </joint>
 
 <joint name="rover_front_camera_joint" type="fixed">

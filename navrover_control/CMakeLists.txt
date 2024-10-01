@@ -27,16 +27,8 @@ find_package(gz-plugin REQUIRED)
 # Include directories
 include_directories(include)
 
-# Add executable
-add_executable(stability_controller src/stability_controller.cpp)
-ament_target_dependencies(stability_controller rclcpp std_msgs sensor_msgs)
-
-# Install executable
-install(TARGETS stability_controller
-    DESTINATION lib/${PROJECT_NAME})
-
 install(
-    DIRECTORY config description
+    DIRECTORY config description src
     DESTINATION share/${PROJECT_NAME}
 )
 

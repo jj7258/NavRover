@@ -1,27 +1,95 @@
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
-    use_sim_time: true
+    update_rate: 100
 
-    # Joint State Broadcaster
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
-
-    effort_controller:
-      type: effort_controllers/JointGroupEffortController
-
-effort_controller:
-  ros__parameters:
-    joints:
-      - left_rocker_arm_joint
-      - right_rocker_arm_joint
     
-    command_interfaces:
-      - effort
+    left_rocker_position_controller:
+      type: position_controllers/JointGroupPositionController
+        
+    right_rocker_position_controller:
+      type: position_controllers/JointGroupPositionController
 
-    state_intefaces:
-      - position  
+left_rocker_position_controller:
+  ros__parameters:
+      joints: 
+        - left_rocker_arm_joint
 
+
+right_rocker_position_controller:
+  ros__parameters:
+      joints: 
+        - right_rocker_arm_joint
+
+
+
+
+
+
+# controller_manager:
+#   ros__parameters:
+#     update_rate: 100  # Hz
+
+#     joint_state_broadcaster:
+#       type: joint_state_broadcaster/JointStateBroadcaster
+
+#     rocker_arm_position_controller:
+#       type: pid_controller/PidController
+
+# rocker_arm_position_controller:
+#   ros__parameters:
+#     dof_names:
+#       - left_rocker_arm_joint
+#       - right_rocker_arm_joint
+
+#     command_interface: position
+
+#     reference_and_state_interfaces: ["position"]
+
+#     gains:
+#       left_rocker_arm_joint: {p: 8.0, i: 5.0, d: 5.0, i_clamp_max: 0.0, i_clamp_min: 0.0}
+#       right_rocker_arm_joint: {p: 8.0, i: 5.0, d: 5.0, i_clamp_max: 0.0, i_clamp_min: 0.0}
+#     state_publish_rate: 100.0
+
+
+
+
+# controller_manager:
+#   ros__parameters:
+#     update_rate: 100  # Hz
+
+#     joint_state_broadcaster:
+#       type: joint_state_broadcaster/JointStateBroadcaster
+
+#     rover_controller:
+#       type: joint_trajectory_controller/JointTrajectoryController
+
+# rover_controller:
+#   ros__parameters:
+#     joints:
+#       - left_rocker_arm_joint
+#       - right_rocker_arm_joint
+#     interface_name: effort
+#     command_interfaces:
+#       - effort
+#     state_interfaces:
+#       - position
+#       - velocity
+#     gains:
+#       left_rocker_joint:
+#         p: 8.0
+#         i: 5.0
+#         d: 5.0
+#       right_rocker_joint:
+#         p: 8.0
+#         i: 5.0
+#         d: 5.0
+#     constraints:
+#       stopped_velocity_tolerance: 0.01
+#       goal_time: 0.0
+#     state_publish_rate: 50.0
+#     action_monitor_rate: 20.0
 
     # Rocker Arm Position Controller
 #     rocker_arm_position_controller:

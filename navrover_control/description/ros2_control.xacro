@@ -45,19 +45,23 @@
         </joint> -->
 
         <joint name = "left_rocker_arm_joint">
-            <command_interface name="effort">
-                <param name="min">-0.24</param>
-                <param name="max">0.24</param>
+            <command_interface name="position">
+                <param name="min">-0.261799</param>
+                <param name="max">0.261799</param>
             </command_interface>
             <state_interface name="effort"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
         </joint>
 
         <joint name = "right_rocker_arm_joint">
-            <command_interface name="effort">
-                <param name="min">-0.24</param>
-                <param name="max">0.24</param>
+            <command_interface name="position">
+                <param name="min">-0.261799</param>
+                <param name="max">0.261799</param>
             </command_interface>
             <state_interface name="effort"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
         </joint>
     </ros2_control>
 
@@ -66,6 +70,23 @@
     <plugin filename="libgz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
       <parameters>$(find navrover_control)/config/navrover_controllers.yaml</parameters>
     </plugin>
+    <!-- Gz Sim Joint Position Controller System-->
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+        <joint_name>left_rocker_arm_joint</joint_name>
+        <topic>/left_rocker_position_controller/commands</topic>
+        <p_gain>8.0</p_gain>
+        <i_gain>5.0</i_gain>
+        <d_gain>5.0</d_gain>
+    </plugin>
+    <!-- Gz Sim Joint Position Controller System-->
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+        <joint_name>right_rocker_arm_joint</joint_name>
+        <topic>/right_rocker_position_controller/commands</topic>
+        <p_gain>8.0</p_gain>
+        <i_gain>5.0</i_gain>
+        <d_gain>5.0</d_gain>
+    </plugin>
+
   </gazebo>
 
 </robot>

@@ -1,5 +1,5 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, RegisterEventHandler
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, RegisterEventHandler, TimerAction
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
@@ -47,22 +47,36 @@ def generate_launch_description():
                    '-name', 'navrover', '-allow_renaming', 'true'],
     )
 
-    # ros2_control related nodes
-    joint_state_broadcaster_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['joint_state_broadcaster',
-                   '--param-file', robot_controllers],
-    )
-
-    effort_controller_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=[
-            'effort_controller',
-            '--param-file',
-            robot_controllers,
-        ],
+    # Delay before launching ros2_control related nodes
+    delay_duration = 5.0  # Delay in seconds
+    delay_action = TimerAction(
+        period=delay_duration,
+        actions=[
+            Node(
+                package='controller_manager',
+                executable='spawner',
+                arguments=['joint_state_broadcaster',
+                           '--param-file', robot_controllers],
+            ),
+            Node(
+                package='controller_manager',
+                executable='spawner',
+                arguments=[
+                    'left_rocker_position_controller',
+                    '--param-file',
+                    robot_controllers,
+                ],
+            ),
+            Node(
+                package='controller_manager',
+                executable='spawner',
+                arguments=[
+                    'right_rocker_position_controller',
+                    '--param-file',
+                    robot_controllers,
+                ],
+            )
+        ]
     )
 
     # Bridge to connect ROS 2 and Gazebo
@@ -81,13 +95,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    # stability_controller_node = Node(
-    #     package='navrover_control',
-    #     executable='stability_controller',
-    #     name='stability_controller',
-    #     output='screen'
-    # )
-
     return LaunchDescription([
         # Launch gazebo environment
         IncludeLaunchDescription(
@@ -100,19 +107,12 @@ def generate_launch_description():
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=gz_spawn_entity,
-                on_exit=[joint_state_broadcaster_spawner],
-            )
-        ),
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=joint_state_broadcaster_spawner,
-                on_exit=[effort_controller_spawner],
+                on_exit=[delay_action],
             )
         ),
         node_robot_state_publisher,
         gz_spawn_entity,
         start_gazebo_ros_bridge_cmd,
-        # stability_controller_node,
         # Launch Arguments
         DeclareLaunchArgument(
             'use_sim_time',
