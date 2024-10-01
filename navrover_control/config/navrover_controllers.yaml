@@ -1,38 +1,38 @@
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Rate at which the controllers are updated
+    update_rate: 100  # Hz
     use_sim_time: true
 
     # Joint State Broadcaster
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    # Left Rocker Arm Position Controller
-    left_rocker_position_controller:
-      type: effort_controllers/JointPositionController  # Use of effort controller
-      joint: left_rocker_arm_joint  # Name of the joint in the URDF/XACRO
-      command_interfaces: 
-        - effort  # Command interface for the effort controller
-      state_interfaces: 
-        - position  # State interface to report position
-      pid:  # PID parameters for control
-        p: 8.0
-        i: 5.0
-        d: 5.0
+    effort_controller:
+      type: effort_controllers/JointGroupEffortController
 
-    # Right Rocker Arm Position Controller
-    right_rocker_position_controller:
-      type: effort_controllers/JointPositionController  # Use of effort controller
-      joint: right_rocker_arm_joint  # Name of the joint in the URDF/XACRO
-      command_interfaces: 
-        - effort  # Command interface for the effort controller
-      state_interfaces: 
-        - position  # State interface to report position
-      pid:  # PID parameters for control
-        p: 8.0
-        i: 5.0
-        d: 5.0
+effort_controller:
+  ros__parameters:
+    joints:
+      - left_rocker_arm_joint
+      - right_rocker_arm_joint
     
+    command_interfaces:
+      - effort
+
+    state_intefaces:
+      - position  
 
 
-  
+    # Rocker Arm Position Controller
+#     rocker_arm_position_controller:
+#       type: position_controllers/JointGroupPositionController
+
+# rocker_arm_position_controller:
+#   ros__parameters:
+#     joints:
+#       - left_rocker_arm_joint
+#       - right_rocker_arm_joint
+#     pid:
+#       p: 10.0
+#       i: 0.1
+#       d: 0.01

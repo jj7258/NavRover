@@ -8,10 +8,10 @@
         </hardware>
 
         <!-- Define command and state interfaces -->
-        <joint name = "left_front_wheel_joint">
+        <!-- <joint name = "left_front_wheel_joint">
             <command_interface name="velocity">
-                <param name="min">-1.5</param>  <!-- Adjusted min value based on velocity -->
-                <param name="max">1.5</param>    <!-- Adjusted max value based on velocity -->
+                <param name="min">-1.5</param>  
+                <param name="max">1.5</param>    
             </command_interface>
             <state_interface name="velocity"/>
             <state_interface name="position"/>
@@ -19,8 +19,8 @@
 
         <joint name = "left_rear_wheel_joint">
             <command_interface name="velocity">
-                <param name="min">-1.5</param>  <!-- Adjusted min value based on velocity -->
-                <param name="max">1.5</param>    <!-- Adjusted max value based on velocity -->
+                <param name="min">-1.5</param>  
+                <param name="max">1.5</param>    
             </command_interface>
             <state_interface name="velocity"/>
             <state_interface name="position"/>
@@ -28,8 +28,8 @@
 
         <joint name = "right_front_wheel_joint">
             <command_interface name="velocity">
-                <param name="min">-1.5</param>  <!-- Adjusted min value based on velocity -->
-                <param name="max">1.5</param>    <!-- Adjusted max value based on velocity -->
+                <param name="min">-1.5</param>  
+                <param name="max">1.5</param>    
             </command_interface>
             <state_interface name="velocity"/>
             <state_interface name="position"/>
@@ -37,35 +37,34 @@
 
         <joint name = "right_rear_wheel_joint">
             <command_interface name="velocity">
-                <param name="min">-1.5</param>  <!-- Adjusted min value based on velocity -->
-                <param name="max">1.5</param>    <!-- Adjusted max value based on velocity -->
+                <param name="min">-1.5</param>  
+                <param name="max">1.5</param>    
             </command_interface>
             <state_interface name="velocity"/>
             <state_interface name="position"/>
-        </joint>
+        </joint> -->
 
         <joint name = "left_rocker_arm_joint">
             <command_interface name="effort">
-                <param name="min">-0.261799</param>
-                <param name="max">0.261799</param>
+                <param name="min">-0.24</param>
+                <param name="max">0.24</param>
             </command_interface>
-            <state_interface name="position"/>
+            <state_interface name="effort"/>
         </joint>
 
         <joint name = "right_rocker_arm_joint">
             <command_interface name="effort">
-                <param name="min">-0.261799</param>
-                <param name="max">0.261799</param>
+                <param name="min">-0.24</param>
+                <param name="max">0.24</param>
             </command_interface>
-            <state_interface name="position"/>
+            <state_interface name="effort"/>
         </joint>
     </ros2_control>
 
   <gazebo>
     <!-- Joint state publisher -->
-    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+    <plugin filename="libgz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
       <parameters>$(find navrover_control)/config/navrover_controllers.yaml</parameters>
-      <controller_manager_prefix_node_name>controller_manager</controller_manager_prefix_node_name>
     </plugin>
   </gazebo>
 

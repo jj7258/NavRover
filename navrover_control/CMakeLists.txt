@@ -9,6 +9,9 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 find_package(rclcpp REQUIRED)  # Add any other necessary dependencies
+find_package(rclpy REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(controller_manager REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
@@ -20,6 +23,17 @@ find_package(gz-sim REQUIRED)
 
 find_package(gz_plugin_vendor REQUIRED)
 find_package(gz-plugin REQUIRED)
+
+# Include directories
+include_directories(include)
+
+# Add executable
+add_executable(stability_controller src/stability_controller.cpp)
+ament_target_dependencies(stability_controller rclcpp std_msgs sensor_msgs)
+
+# Install executable
+install(TARGETS stability_controller
+    DESTINATION lib/${PROJECT_NAME})
 
 install(
     DIRECTORY config description

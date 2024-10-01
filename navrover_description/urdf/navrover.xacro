@@ -281,16 +281,18 @@
   <origin xyz="0.009316 -0.178074 0.172741" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="right_rocker_arm_1"/>
-  <axis xyz="0.0 -1.0 0.0"/>
+  <axis xyz="0.0 1.0 0.0"/>
   <limit upper="0.261799" lower="-0.261799" effort="100" velocity="100"/>
+  <!-- <dynamics friction = "1.0" damping = "0.1"/> -->
 </joint>
 
 <joint name="left_rocker_arm_joint" type="revolute">
   <origin xyz="0.009316 0.131926 0.172741" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="left_rocker_arm_1"/>
-  <axis xyz="0.0 -1.0 0.0"/>
+  <axis xyz="0.0 1.0 0.0"/>
   <limit upper="0.261799" lower="-0.261799" effort="100" velocity="100"/>
+  <!-- <dynamics friction = "1.0" damping = "0.1"/> -->
 </joint>
 
 <joint name="rover_front_camera_joint" type="fixed">
